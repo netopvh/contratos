@@ -50,6 +50,11 @@ class Contrato extends Model
         return $this->belongsTo(Casa::class);
     }
 
+    public function unidade()
+    {
+        return $this->belongsTo(Unidade::class);
+    }
+
     public function scopeSearch($query, $keyword)
     {
         if (is_array($keyword)) {

@@ -53,7 +53,7 @@
                                 {!! Form::open(['route' => 'contratos.store', 'method' => 'post', 'id' => 'contratoForm', 'autocomplete' => 'off']) !!}
                                 @include('pages.contratos.forms.form')
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
-                                <a href="{{ route('contratos.index') }}" class="btn btn-primary">Voltar</a>
+                                <a href="{{ route('contratos.index') }}" class="btn btn-primary"><i class="fa fa-share"></i> Voltar</a>
                                 {!! Form::close() !!}
                             </div>
                         </div>

@@ -125,4 +125,5 @@ Route::group(['prefix' => 'contratos', 'namespace' => 'Manager'], function(){
     Route::get('/lists', 'ContratoController@lists')->name('contratos.lists');
     Route::get('/new', 'ContratoController@create')->name('contratos.create');
     Route::post('/', 'ContratoController@store')->name('contratos.store');
+    Route::get('/{id}/view', 'ContratoController@view')->name('contratos.view');
 });

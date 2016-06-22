@@ -63,13 +63,17 @@
                     <div class="box-body table-responsive">
                         <div class="row">
                             <div class="col-md-10">
-                                <a href="{{ route('contratos.create') }}" class="btn btn-primary">
+                                <a href="{{ route('contratos.create') }}" class="btn btn-bitbucket">
                                     <i class="fa fa-plus-circle"></i>
                                     Cadastrar Contrato
                                 </a>
-                                <a href="{{ route('casas.create') }}" class="btn btn-primary">
+                                <a href="{{ route('casas.create') }}" class="btn btn-bitbucket">
                                     <i class="fa fa-newspaper-o"></i>
                                     Aditivar Contrato
+                                </a>
+                                <a href="{{ route('casas.create') }}" class="btn btn-bitbucket">
+                                    <i class="fa fa-file-excel-o"></i>
+                                    Exportar Excel
                                 </a>
                             </div>
                         </div>
@@ -91,7 +95,7 @@
                                             <th>Início</th>
                                             <th>Fim</th>
                                             <th>Status</th>
-                                            <th width="60" class="text-center">Ações</th>
+                                            <th width="110" class="text-center">Ações</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -112,13 +116,17 @@
                                                 <td>{{ $contrato->data_fim }}</td>
                                                 <td>{{ $status[$contrato->status] }}</td>
                                                 <td>
-                                                    <a href="{{ route('permissions.edit', $contrato->id) }}"
-                                                       class="btn-sm btn-primary" data-toggle="tooltip" title="Editar">
+                                                    <a href="{{ route('contratos.view', $contrato->id) }}"
+                                                       class="btn-sm btn-microsoft" data-toggle="tooltip" title="Visualizar">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>&nbsp;
+                                                    <a href="" class="btn-sm btn-bitbucket" data-toggle="tooltip"
+                                                       title="Editar">
                                                         <i class="fa fa-edit"></i>
                                                     </a>&nbsp;
-                                                    <a href="" class="btn-sm btn-danger" data-toggle="tooltip"
-                                                       title="Remover">
-                                                        <i class="fa fa-remove"></i>
+                                                    <a href="" class="btn-sm btn-google" data-toggle="tooltip"
+                                                       title="Status">
+                                                        <i class="fa fa-tags"></i>
                                                     </a>
                                                 </td>
                                             </tr>

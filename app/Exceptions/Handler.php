@@ -22,7 +22,6 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         AuthorizationException::class,
         HttpException::class,
-        ModelNotFoundException::class,
         ValidationException::class,
         GeneralException::class,
     ];
@@ -51,10 +50,6 @@ class Handler extends ExceptionHandler
     {
         if($e instanceof NotFoundHttpException){
             return response()->view('errors.500');
-        }
-
-        if($e instanceof HttpException){
-            return response()->view('errors.404');
         }
 
         if($e instanceof FatalErrorException){

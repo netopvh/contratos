@@ -2,6 +2,8 @@
 
 namespace CodeBase\Http\Controllers\Manager;
 
+use Adldap\Exceptions\ModelNotFoundException;
+use CodeBase\Enum\TipoPessoa;
 use CodeBase\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use CodeBase\Http\Requests;
@@ -88,5 +90,25 @@ class ContratoController extends BaseController
         return null;
     }
 
+    /*
+     * Buscar registro para exibição individual
+     *
+     * @return mixed
+     */
+    public function view($id)
+    {
+        try{
+            $contrato = $this->contratos->find($id);
+
+            $tipo = TipoPessoa::getConstants();
+
+            $status = Status::getConstants();
+
+            return view('pages.contratos.view', compact('contrato', 'tipo', 'status'));
+        }catch (ModelNotFoundException $e){
+            flash()->error('Erro: '. $e->getMessage());
+            return redirect()->route('contratos.index');
+        }
+    }
     
 }
