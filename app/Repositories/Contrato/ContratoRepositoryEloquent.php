@@ -79,22 +79,20 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['executado'] = $attributes['executado'];
             $data['data_inicio'] = $attributes['data_inicio'];
             $data['data_fim'] = $attributes['data_fim'];
+            if(! empty($attributes['comentario'])){
+                $data['comentario'] = $attributes['comentario'];
+            }
             $gestores = $attributes['gestores'];
 
             $contrato = $this->model->create($data);
 
-            $contratoId = $contrato->id;
+            $contrato->gestores()->attach($gestores);
 
-            foreach ($gestores as $gestor) {
-                $contratoGestores = new ContratoGestor();
-                $contratoGestores->contrato_id = $contratoId;
-                $contratoGestores->user_id = (int) $gestor;
-                $contratoGestores->save();
-            }
             return true;
         }catch (\Exception $e){
             flash()->error("Erro: ". $e->getMessage());
-            return redirect()->route('contratos.index');        }
+            return redirect()->route('contratos.index');
+        }
 
     }
 

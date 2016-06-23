@@ -28,6 +28,7 @@ class CreateContratosTable extends Migration
             $table->date('data_inicio');
             $table->date('data_fim');
             $table->enum('status',Status::getKeys());
+            $table->longText('comentario');
             $table->timestamps();
         });
     }

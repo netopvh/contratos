@@ -70,13 +70,23 @@ class ContratoController extends BaseController
         return view('pages.contratos.list', compact('contratos', 'status'));
     }
 
+    /*
+     * Prepara para uma nova inserção no banco de dados
+     *
+     *
+     */
     public function create()
     {
-        $users = $this->users->lists('name', 'id');
+        $users = $this->users->all(['id', 'name']);
 
         return view('pages.contratos.create', compact('users'));
     }
 
+    /*
+     * Salva registro no banco de dados
+     *
+     * @return null
+     */
     public function store(Request $request)
     {
         $result = $this->contratos->create($request->all());
@@ -108,7 +118,26 @@ class ContratoController extends BaseController
         }
     }
 
-    public function getPdf()
+    public function edit($id)
+    {
+        try{
+
+            $contrato = $this->contratos->with('gestores')->find($id);
+            $users = $this->users->all(['name', 'id']);
+            $gestores = [];
+            foreach($contrato->gestores->toArray() as $gestor){
+                $gestores[] = $gestor['id'];
+            }
+
+            return view('pages.contratos.edit', compact('contrato', 'users', 'gestores'));
+
+        }catch (ModelNotFoundException $e){
+            flash()->error('Erro: ' . $e->getMessage());
+            return redirect()->route('contratos.index');
+        }
+    }
+
+    public function update($id, Request $request)
     {
 
     }

@@ -120,7 +120,7 @@
                                                        class="btn-sm btn-microsoft" data-toggle="tooltip" title="Visualizar">
                                                         <i class="fa fa-eye"></i>
                                                     </a>&nbsp;
-                                                    <a href="" class="btn-sm btn-bitbucket" data-toggle="tooltip"
+                                                    <a href="{{ route('contratos.edit', $contrato->id) }}" class="btn-sm btn-bitbucket" data-toggle="tooltip"
                                                        title="Editar">
                                                         <i class="fa fa-edit"></i>
                                                     </a>&nbsp;

@@ -1,27 +1,27 @@
 @extends('layouts.app')
 
 @section('scripts-before')
-<script src="{{ asset('plugins/jQuery.print/jQuery.print.js') }}"></script>
-<script>
-$(function(){
-    $('#send').click(function(){
-        $("#print").print({
-            globalStyles: true,
-            mediaPrint: false,
-            stylesheet: null,
-            noPrintSelector: ".no-print",
-            iframe: true,
-            append: null,
-            prepend: null,
-            manuallyCopyFormValues: true,
-            deferred: $.Deferred(),
-            timeout: 250,
-            title: "Gestão de Contratos",
-            doctype: '<!doctype html>'
+    <script src="{{ asset('plugins/jQuery.print/jQuery.print.js') }}"></script>
+    <script>
+        $(function () {
+            $('#send').click(function () {
+                $("#print").print({
+                    globalStyles: true,
+                    mediaPrint: false,
+                    stylesheet: null,
+                    noPrintSelector: ".no-print",
+                    iframe: true,
+                    append: null,
+                    prepend: null,
+                    manuallyCopyFormValues: true,
+                    deferred: $.Deferred(),
+                    timeout: 250,
+                    title: "Gestão de Contratos",
+                    doctype: '<!doctype html>'
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
 @stop
 
 @section('content')
@@ -58,12 +58,14 @@ $(function(){
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <b>Contrato Nº:</b> {{ $contrato->numero }} / {{ $contrato->ano }}
+                                                        <b>Contrato Nº:</b> {{ $contrato->numero }}
+                                                        / {{ $contrato->ano }}
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <b>Vigência:</b> {{ $contrato->data_inicio }} até {{ $contrato->data_fim }}
+                                                        <b>Vigência:</b> {{ $contrato->data_inicio }}
+                                                        até {{ $contrato->data_fim }}
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -81,6 +83,7 @@ $(function(){
                                             </div>
                                         </div>
                                         <br>
+
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <fieldset>
@@ -102,6 +105,7 @@ $(function(){
                                                         </div>
                                                     </div>
                                                     <br>
+
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <b>Responsável: </b>{{ $contrato->empresa->responsavel }}
@@ -114,22 +118,27 @@ $(function(){
                                             </div>
                                         </div>
                                         <br>
+
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <fieldset>
                                                     <legend>Informações do Contrato</legend>
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <b>Valor Homologado: </b>R$ {{ number_format($contrato->homologado, 2, ',', '.') }}
+                                                            <b>Valor
+                                                                Homologado: </b>R$ {{ number_format($contrato->homologado, 2, ',', '.') }}
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <b>Valor Homologado: </b>R$ {{ number_format($contrato->executado, 2, ',', '.') }}
+                                                            <b>Valor
+                                                                Homologado: </b>R$ {{ number_format($contrato->executado, 2, ',', '.') }}
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <b>Situação do Contrato: </b>{{ $status[$contrato->status] }}
+                                                            <b>Situação do
+                                                                Contrato: </b>{{ $status[$contrato->status] }}
                                                         </div>
                                                     </div>
                                                     <br>
+
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <table class="table table-bordered table-striped table-condensed">
@@ -149,6 +158,15 @@ $(function(){
                                                             </table>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <b>Comentários: </b> <br>
+
+                                                            <div>
+                                                                {!! nl2br($contrato->comentario) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -156,10 +174,14 @@ $(function(){
                                 </div>
                             </div>
                         </div>
+                        <br>
+
                         <div class="row">
                             <div class="col-md-5">
-                                <button class="btn btn-facebook" id="send"><i class="fa fa-print"></i> Imprimir</button>&nbsp;
-                                <a href="{{ route('contratos.index') }}" class="btn btn-dropbox"><i class="fa fa-share"></i> Voltar</a>
+                                <button class="btn btn-facebook" id="send"><i class="fa fa-print"></i> Imprimir</button>
+                                &nbsp;
+                                <a href="{{ route('contratos.index') }}" class="btn btn-dropbox"><i
+                                            class="fa fa-share"></i> Voltar</a>
                             </div>
                         </div>
                     </div>
