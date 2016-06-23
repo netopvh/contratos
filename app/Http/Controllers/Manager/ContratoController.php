@@ -139,7 +139,15 @@ class ContratoController extends BaseController
 
     public function update($id, Request $request)
     {
+        try{
+            $this->contratos->update($request->all(), $id);
 
+            flash()->success('Contrato atualizado com sucesso!');
+            return redirect()->route('contratos.index');
+        }catch (ModelNotFoundException $e){
+            flash()->error('Erro: ' . $e->getMessage());
+            return redirect()->route('contratos.index');
+        }
     }
 
 }

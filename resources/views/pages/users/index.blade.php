@@ -25,8 +25,10 @@
                     <div class="box-body table-responsive">
                         <div class="row">
                             <div class="col-md-12">
+                                @permission('sync-usuarios')
                                 <a href="{{ route('users.import') }}" class="btn btn-primary">Importar Usuários</a>
                                 <br><br>
+                                @endpermission
                                 @include('vendor.flash.message')
                                 <table id="grid" class="table table-condensed table-hover">
                                     <thead>

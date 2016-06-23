@@ -96,4 +96,36 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
     }
 
+    public function update(array $attributes, $id)
+    {
+        try{
+            $data['numero'] = $attributes['numero'];
+            $data['ano'] = $attributes['ano'];
+            $data['casa_id'] = $attributes['casa_id'];
+            if(! empty($attributes['unidade_id'])){
+                $data['unidade_id'] = $attributes['unidade_id'];
+            }
+            $data['empresa_id'] = $attributes['empresa_id'];
+            $data['homologado'] = $attributes['homologado'];
+            $data['executado'] = $attributes['executado'];
+            $data['data_inicio'] = $attributes['data_inicio'];
+            $data['data_fim'] = $attributes['data_fim'];
+            if(! empty($attributes['comentario'])){
+                $data['comentario'] = $attributes['comentario'];
+            }
+            $gestores = $attributes['gestores'];
+
+            $model = $this->model->findOrFail($id);
+            $model->fill($data);
+            $model->save();
+            $model->gestores()->detach();
+            $model->gestores()->attach($gestores);
+
+            return true;
+        }catch (\Exception $e){
+            flash()->error("Erro: ". $e->getMessage());
+            return redirect()->route('contratos.index');
+        }
+    }
+
 }
