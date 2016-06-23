@@ -43,16 +43,15 @@ class ContratoController extends BaseController
      */
     public function index()
     {
-        if(auth()->user()->is_super == 1){
+        if (auth()->user()->is_super == 1) {
 
 
-
-        }else{
-            $contratos = $this->contratos->with(['empresa','gestores','casa'])->all();
+        } else {
+            $contratos = $this->contratos->with(['empresa', 'gestores', 'casa'])->all();
             $status = Status::getConstants();
         }
 
-        return view('pages.contratos.index', compact('contratos','status'));
+        return view('pages.contratos.index', compact('contratos', 'status'));
     }
 
     /*
@@ -63,12 +62,12 @@ class ContratoController extends BaseController
     public function lists(Request $request)
     {
         $contratos = $this->contratos->search($request->all());
-        if(!$contratos){
+        if (!$contratos) {
             flash()->error('Preencha ao menos um campo para pesquisa');
             return redirect()->route('contratos.index');
         }
         $status = Status::getConstants();
-        return view('pages.contratos.list', compact('contratos','status'));
+        return view('pages.contratos.list', compact('contratos', 'status'));
     }
 
     public function create()
@@ -82,7 +81,7 @@ class ContratoController extends BaseController
     {
         $result = $this->contratos->create($request->all());
 
-        if($result){
+        if ($result) {
             flash()->success('Cadastro Realizado com sucesso!');
             return redirect()->route('contratos.index');
         }
@@ -97,18 +96,21 @@ class ContratoController extends BaseController
      */
     public function view($id)
     {
-        try{
+        try {
             $contrato = $this->contratos->find($id);
-
             $tipo = TipoPessoa::getConstants();
-
             $status = Status::getConstants();
 
             return view('pages.contratos.view', compact('contrato', 'tipo', 'status'));
-        }catch (ModelNotFoundException $e){
-            flash()->error('Erro: '. $e->getMessage());
+        } catch (ModelNotFoundException $e) {
+            flash()->error('Erro: ' . $e->getMessage());
             return redirect()->route('contratos.index');
         }
     }
-    
+
+    public function getPdf()
+    {
+
+    }
+
 }

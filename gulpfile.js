@@ -24,6 +24,7 @@ elixir(function (mix) {
     mix.copy('resources/assets/bower_components/jquery-treegrid','public/plugins/jquery-treegrid');
     mix.copy('resources/assets/bower_components/jquery.inputmask','public/plugins/jquery.inputmask');
     mix.copy('resources/assets/bower_components/jquery-maskmoney','public/plugins/jquery-maskmoney');
+    mix.copy('resources/assets/bower_components/jQuery.print','public/plugins/jQuery.print');
 
     //Default files for theme AdminLTE
     mix.styles([
