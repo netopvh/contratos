@@ -264,10 +264,67 @@ class PermissionTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+            [
+                'name' => 'ver-movimentos',
+                'display_name' => 'Ver Movimentações',
+                'group_id' => 12,
+                'sort' => 32,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'add-contratos',
+                'display_name' => 'Cadastrar Contratos',
+                'group_id' => 13,
+                'sort' => 33,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'aditivar-contratos',
+                'display_name' => 'Aditivar Contratos',
+                'group_id' => 13,
+                'sort' => 34,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'exportar-contratos',
+                'display_name' => 'Exportar Contratos',
+                'group_id' => 13,
+                'sort' => 35,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'visualizar-contratos',
+                'display_name' => 'Visualizar Contratos',
+                'group_id' => 13,
+                'sort' => 36,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'editar-contratos',
+                'display_name' => 'Editar Contratos',
+                'group_id' => 13,
+                'sort' => 37,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'status-contratos',
+                'display_name' => 'Definir Status Contratos',
+                'group_id' => 13,
+                'sort' => 38,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+
         ]);
 
         $roleAdmin = Role::find(1);
-        $roleAdmin->attachPermissions([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]);
+        $roleAdmin->attachPermissions([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38]);
 
         $roleGerente = Role::find(2);
         $roleGerente->attachPermissions([1,2,3,12,13]);

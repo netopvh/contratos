@@ -8,16 +8,16 @@ use CodeBase\Repositories\Casa\CasaRepositoryEloquent;
 class CasaComposer
 {
     /**
-     * The user repository implementation.
+     * Implementação da casa repository
      *
-     * @var CasaRepository
+     * @var CasaRepositoryEloquent
      */
     protected $casas;
 
     /**
-     * Create a new profile composer.
+     * Cria um novo Casa Compose.
      *
-     * @param  UserRepository  $users
+     * @param  CasaRepositoryEloquent  $casas
      * @return void
      */
     public function __construct(CasaRepositoryEloquent $casas)
@@ -27,7 +27,7 @@ class CasaComposer
     }
 
     /**
-     * Bind data to the view.
+     * Faz um bind dos dados para a view
      *
      * @param  View  $view
      * @return void

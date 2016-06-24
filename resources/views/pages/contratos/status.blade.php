@@ -5,7 +5,7 @@
         <h1>
             Gestão de Contratos
         </h1>
-        {!! Breadcrumbs::render('empresas.index') !!}
+        {!! Breadcrumbs::render('contratos.status') !!}
     </section>
     <div class="content">
         <div class="row">

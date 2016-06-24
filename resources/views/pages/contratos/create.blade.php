@@ -30,7 +30,7 @@
         <h1>
             Gestão de Contratos
         </h1>
-        {!! Breadcrumbs::render('empresas.create') !!}
+        {!! Breadcrumbs::render('contratos.create') !!}
     </section>
     <div class="content">
         <div class="row">

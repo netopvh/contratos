@@ -99,5 +99,31 @@ class PermissionGroupTableSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
         ]);
+
+        DB::table('permissions_group')->insert([
+            [
+                'name' => 'Movimentação e Relatórios',
+                'sort' => 3,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ]);
+
+        DB::table('permissions_group')->insert([
+            [
+                'name' => 'Movimentação',
+                'parent_id' => 12,
+                'sort' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Relatórios',
+                'parent_id' => 12,
+                'sort' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+        ]);
     }
 }

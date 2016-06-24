@@ -35,5 +35,6 @@ class EmpresaComposer
     public function compose(View $view)
     {
         $view->with('listEmpresas', $this->empresas->getEmpresasList());
+        $view->with('allEmpresas', $this->empresas->all());
     }
 }

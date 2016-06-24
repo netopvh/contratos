@@ -148,3 +148,35 @@ Breadcrumbs::register('empresas.edit', function($breadcrumbs) {
 /*
  * Fim Empresas
  */
+
+/*
+ * Início Contratos
+ */
+Breadcrumbs::register('contratos.index', function($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Contratos', route('contratos.index'));
+});
+
+Breadcrumbs::register('contratos.create', function($breadcrumbs) {
+    $breadcrumbs->parent('contratos.index');
+    $breadcrumbs->push('Novo', route('contratos.create'));
+});
+
+Breadcrumbs::register('contratos.view', function($breadcrumbs) {
+    $breadcrumbs->parent('contratos.index');
+    $breadcrumbs->push('Ver Contrato', '');
+});
+
+Breadcrumbs::register('contratos.edit', function($breadcrumbs) {
+    $breadcrumbs->parent('contratos.index');
+    $breadcrumbs->push('Editar', '');
+});
+
+Breadcrumbs::register('contratos.status', function($breadcrumbs) {
+    $breadcrumbs->parent('contratos.index');
+    $breadcrumbs->push('Status', '');
+});
+
+/*
+ * Fim Contratos
+ */
