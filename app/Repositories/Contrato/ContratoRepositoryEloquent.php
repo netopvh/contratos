@@ -147,4 +147,11 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         }
     }
 
+    public function atualizaStatus(array $attributes, $id)
+    {
+        $model = $this->model->findOrFail($id);
+        $model->fill($attributes);
+        $model->save();
+    }
+
 }

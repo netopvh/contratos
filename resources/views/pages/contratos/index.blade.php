@@ -124,7 +124,7 @@
                                                        title="Editar">
                                                         <i class="fa fa-edit"></i>
                                                     </a>&nbsp;
-                                                    <a href="" class="btn-sm btn-google" data-toggle="tooltip"
+                                                    <a href="{{ route('contratos.status', $contrato->id) }}" class="btn-sm btn-google" data-toggle="tooltip"
                                                        title="Status">
                                                         <i class="fa fa-tags"></i>
                                                     </a>

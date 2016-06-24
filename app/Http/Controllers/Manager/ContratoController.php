@@ -150,4 +150,34 @@ class ContratoController extends BaseController
         }
     }
 
+    public function getStatus($id)
+    {
+        try{
+
+            $contrato = $this->contratos->with('empresa')->find($id);
+
+            $status = Status::getConstants();
+
+            return view('pages.contratos.status', compact('contrato', 'status'));
+
+        }catch (ModelNotFoundException $e){
+            flash()->error('Erro: ' . $e->getMessage());
+            return redirect()->route('contratos.index');
+        }
+    }
+
+    public function postStatus(Request $request, $id)
+    {
+        try{
+            $this->contratos->atualizaStatus($request->only('status'), $id);
+
+            flash()->success('Status atualizado com sucesso!');
+            return redirect()->route('contratos.index');
+
+        }catch (ModelNotFoundException $e){
+            flash()->error('Erro: ' . $e->getMessage());
+            return redirect()->route('contratos.index');
+        }
+    }
+
 }

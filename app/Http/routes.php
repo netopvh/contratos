@@ -128,4 +128,6 @@ Route::group(['prefix' => 'contratos', 'namespace' => 'Manager'], function(){
     Route::get('/view/{id}', 'ContratoController@view')->name('contratos.view');
     Route::get('/edit/{id}', 'ContratoController@edit')->name('contratos.edit');
     Route::patch('/{id}', 'ContratoController@update')->name('contratos.update');
+    Route::get('/status/{id}', 'ContratoController@getStatus')->name('contratos.status');
+    Route::patch('/status/{id}','ContratoController@postStatus');
 });
