@@ -7,8 +7,8 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeBase\Repositories\Contrato\ContratoRepository;
 use CodeBase\Models\Contrato;
-use CodeBase\Models\ContratoGestor;
 use CodeBase\Validators\ContratoValidator;
+use Prettus\Validator\Contracts\ValidatorInterface;
 use Carbon\Carbon;
 
 class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepository
@@ -68,6 +68,15 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
     public function create(array $attributes)
     {
         try{
+            if (!is_null($this->validator)) {
+                // we should pass data that has been casts by the model
+                // to make sure data type are same because validator may need to use
+                // this data to compare with data that fetch from database.
+                $attributes = $this->model->newInstance()->forceFill($attributes)->toArray();
+
+                $this->validator->with($attributes)->passesOrFail(ValidatorInterface::RULE_CREATE);
+            }
+
             $data['numero'] = $attributes['numero'];
             $data['ano'] = $attributes['ano'];
             $data['casa_id'] = $attributes['casa_id'];
@@ -84,7 +93,9 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             }
             $gestores = $attributes['gestores'];
 
-            $contrato = $this->model->create($data);
+            $contrato = $this->model->newInstance($data);
+            $contrato->save();
+            $this->resetModel();
 
             $contrato->gestores()->attach($gestores);
 
@@ -99,6 +110,14 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
     public function update(array $attributes, $id)
     {
         try{
+            if (!is_null($this->validator)) {
+                // we should pass data that has been casts by the model
+                // to make sure data type are same because validator may need to use
+                // this data to compare with data that fetch from database.
+                $attributes = $this->model->newInstance()->forceFill($attributes)->toArray();
+
+                $this->validator->with($attributes)->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            }
             $data['numero'] = $attributes['numero'];
             $data['ano'] = $attributes['ano'];
             $data['casa_id'] = $attributes['casa_id'];

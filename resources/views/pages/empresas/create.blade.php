@@ -5,6 +5,41 @@
 <script src="{{ asset('plugins/jquery-validation/dist/additional-methods.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery.inputmask/dist/inputmask/inputmask.js') }}"></script>
 <script src="{{ asset('plugins/jquery.inputmask/dist/inputmask/jquery.inputmask.js') }}"></script>
+<script>
+    $(document).ready(function () {
+
+        //Faz a verificação e realiza a mascara na leitura do documento
+        var tipo = $('#tipo').val();
+
+        if(tipo == 'PJ'){
+            $('#cnpj').inputmask("99.999.999/9999-99", {
+                removeMaskOnSubmit: true
+            });
+        }else if(tipo == 'PF'){
+            $('#cnpj').inputmask("999.999.999-99", {
+                removeMaskOnSubmit: true
+            });
+        }
+
+        //Muda de acordo com a ação
+        $("#tipo").change(function () {
+            var value = $('#tipo').val();
+
+            if(value == 'PJ'){
+                $('#cnpj').inputmask("99.999.999/9999-99", {
+                    removeMaskOnSubmit: true
+                });
+            }else if(value == 'PF'){
+                $('#cnpj').inputmask("999.999.999-99", {
+                    removeMaskOnSubmit: true
+                });
+            }else{
+                $('#cnpj').inputmask('remove');
+            }
+        });
+
+    });
+</script>
 @endsection
 
 @section('content')
