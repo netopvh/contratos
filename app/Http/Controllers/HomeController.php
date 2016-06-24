@@ -5,17 +5,24 @@ namespace CodeBase\Http\Controllers;
 use CodeBase\Http\Requests;
 use Illuminate\Http\Request;
 use Auth, Adldap;
+use CodeBase\Repositories\Contrato\ContratoRepositoryEloquent;
 
 class HomeController extends BaseController
 {
+    /*
+     *
+     */
+    protected $contratos;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ContratoRepositoryEloquent $contratos)
     {
         parent::__construct();
+        $this->contratos = $contratos;
     }
 
     /**
@@ -25,7 +32,9 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        return view('home');
+        $contratos = $this->contratos->with('empresa')->all();
+
+        return view('home', compact('contratos'));
     }
 
 

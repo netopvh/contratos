@@ -43,12 +43,14 @@ class ContratoController extends BaseController
      */
     public function index()
     {
-        if (auth()->user()->is_super == 1) {
+        if (!auth()->user()->can('ver-movimentos')) {
+            abort(403);
+        }
 
-
-        } else {
+        if (! auth()->user()->is_super == 1) {
             $contratos = $this->contratos->with(['empresa', 'gestores', 'casa'])->all();
             $status = Status::getConstants();
+
         }
 
         return view('pages.contratos.index', compact('contratos', 'status'));
@@ -61,6 +63,10 @@ class ContratoController extends BaseController
      */
     public function lists(Request $request)
     {
+        if (!auth()->user()->can('ver-contratos')) {
+            abort(403);
+        }
+
         $contratos = $this->contratos->search($request->all());
         if (!$contratos) {
             flash()->error('Preencha ao menos um campo para pesquisa');
@@ -77,6 +83,10 @@ class ContratoController extends BaseController
      */
     public function create()
     {
+        if (!auth()->user()->can('add-contratos')) {
+            abort(403);
+        }
+
         $users = $this->users->all(['id', 'name']);
 
         return view('pages.contratos.create', compact('users'));
@@ -89,6 +99,10 @@ class ContratoController extends BaseController
      */
     public function store(Request $request)
     {
+        if (!auth()->user()->can('add-contratos')) {
+            abort(403);
+        }
+
         $result = $this->contratos->create($request->all());
 
         if ($result) {
@@ -107,6 +121,10 @@ class ContratoController extends BaseController
     public function view($id)
     {
         try {
+            if (!auth()->user()->can('visualizar-contratos')) {
+                abort(403);
+            }
+
             $contrato = $this->contratos->find($id);
             $tipo = TipoPessoa::getConstants();
             $status = Status::getConstants();
@@ -121,6 +139,10 @@ class ContratoController extends BaseController
     public function edit($id)
     {
         try{
+
+            if (!auth()->user()->can('editar-contratos')) {
+                abort(403);
+            }
 
             $contrato = $this->contratos->with('gestores')->find($id);
             $users = $this->users->all(['name', 'id']);
@@ -140,6 +162,11 @@ class ContratoController extends BaseController
     public function update($id, Request $request)
     {
         try{
+
+            if (!auth()->user()->can('editar-contratos')) {
+                abort(403);
+            }
+
             $this->contratos->update($request->all(), $id);
 
             flash()->success('Contrato atualizado com sucesso!');
@@ -153,6 +180,10 @@ class ContratoController extends BaseController
     public function getStatus($id)
     {
         try{
+
+            if (!auth()->user()->can('status-contratos')) {
+                abort(403);
+            }
 
             $contrato = $this->contratos->with('empresa')->find($id);
 
@@ -169,6 +200,10 @@ class ContratoController extends BaseController
     public function postStatus(Request $request, $id)
     {
         try{
+            if (!auth()->user()->can('status-contratos')) {
+                abort(403);
+            }
+
             $this->contratos->atualizaStatus($request->only('status'), $id);
 
             flash()->success('Status atualizado com sucesso!');

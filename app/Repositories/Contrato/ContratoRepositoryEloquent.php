@@ -56,10 +56,6 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             if(is_int($value)){
                 $query->orWhere($key, $value);
             }
-            if(strtotime($value)){
-                $value = Carbon::createFromFormat('d/m/Y', $value);
-                $query->orWhere($key, $value);
-            }
         }
 
         return $query->with(['empresa','gestores','casa'])->get();

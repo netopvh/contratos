@@ -22,7 +22,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Total Contratos</span>
-                        <span class="info-box-number">{{ str_pad($allContratos->count(), 4, '0', STR_PAD_LEFT)}}</span>
+                        <span class="info-box-number">{{ str_pad($contratos->count(), 4, '0', STR_PAD_LEFT)}}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -62,12 +62,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($allContratos->count() < 0)
+                                @if($contratos->count() < 0)
                                     <tr>
                                         <td colspan="3">Sem Contratos Próximos do Vencimento</td>
                                     </tr>
                                 @else
-                                    @foreach($allContratos as $contrato)
+                                    @foreach($contratos as $contrato)
                                         <tr class="bg-danger">
                                             <td>{{ $contrato->numero }} / {{ $contrato->ano }}</td>
                                             <td>@if(strlen($contrato->empresa->cpf_cnpj) == 14)
@@ -78,9 +78,11 @@
                                             <td>{{ $contrato->empresa->razao }}</td>
                                             <td>{{ $contrato->data_fim }}</td>
                                             <td>
+                                                @permission('visualizar-contratos')
                                                 <a href="{{ route('contratos.view', $contrato->id) }}" class="btn btn-sm btn-bitbucket" data-toggle="tooltip" title="Visualizar">
                                                     <i class="fa fa-search"></i>
                                                 </a>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @endforeach

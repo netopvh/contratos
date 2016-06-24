@@ -52,6 +52,10 @@ class Handler extends ExceptionHandler
             return response()->view('errors.500');
         }
 
+        if($e instanceof HttpException){
+            return response()->view('errors.403');
+        }
+
         if($e instanceof FatalErrorException){
             if(auth()->guest()){
                 return response()->redirectTo(route('home'));

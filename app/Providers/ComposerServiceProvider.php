@@ -26,9 +26,6 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             ['pages.contratos.forms.filter', 'pages.contratos.forms.form', 'home'], 'CodeBase\Http\ViewComposers\EmpresaComposer'
         );
-        view()->composer(
-            ['home'], 'CodeBase\Http\ViewComposers\ContratoComposer'
-        );
 
     }
 
