@@ -6,6 +6,9 @@ use CodeBase\Http\Requests;
 use Illuminate\Http\Request;
 use Auth, Adldap;
 use CodeBase\Repositories\Contrato\ContratoRepositoryEloquent;
+use CodeBase\Events\MailSendNotification;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends BaseController
 {
@@ -32,11 +35,12 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        $contratos = $this->contratos->with('empresa')->all();
+        $contratos = $this->contratos->getByVencimento();
+
+        Event::fire(new MailSendNotification($contratos));
 
         return view('home', compact('contratos'));
     }
-
 
 
 }

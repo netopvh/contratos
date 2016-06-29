@@ -40,12 +40,12 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
     public function search($input)
     {
         foreach ($input as $key => $value) {
-            if($value != ''){
+            if ($value != '') {
                 $fields[$key] = $value;
             }
         }
 
-        if(empty($fields)){
+        if (empty($fields)) {
             return false;
         }
 
@@ -53,17 +53,17 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
         foreach ($fields as $key => $value) {
             $query->orWhere($key, 'LIKE', $value);
-            if(is_int($value)){
+            if (is_int($value)) {
                 $query->orWhere($key, $value);
             }
         }
 
-        return $query->with(['empresa','gestores','casa'])->get();
+        return $query->with(['empresa', 'gestores', 'casa'])->get();
     }
 
     public function create(array $attributes)
     {
-        try{
+        try {
             if (!is_null($this->validator)) {
                 // we should pass data that has been casts by the model
                 // to make sure data type are same because validator may need to use
@@ -76,7 +76,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['numero'] = $attributes['numero'];
             $data['ano'] = $attributes['ano'];
             $data['casa_id'] = $attributes['casa_id'];
-            if(! empty($attributes['unidade_id'])){
+            if (!empty($attributes['unidade_id'])) {
                 $data['unidade_id'] = $attributes['unidade_id'];
             }
             $data['empresa_id'] = $attributes['empresa_id'];
@@ -84,7 +84,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['executado'] = $attributes['executado'];
             $data['data_inicio'] = $attributes['data_inicio'];
             $data['data_fim'] = $attributes['data_fim'];
-            if(! empty($attributes['comentario'])){
+            if (!empty($attributes['comentario'])) {
                 $data['comentario'] = $attributes['comentario'];
             }
             $gestores = $attributes['gestores'];
@@ -96,8 +96,8 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $contrato->gestores()->attach($gestores);
 
             return true;
-        }catch (\Exception $e){
-            flash()->error("Erro: ". $e->getMessage());
+        } catch (\Exception $e) {
+            flash()->error("Erro: " . $e->getMessage());
             return redirect()->route('contratos.index');
         }
 
@@ -105,7 +105,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
     public function update(array $attributes, $id)
     {
-        try{
+        try {
             if (!is_null($this->validator)) {
                 // we should pass data that has been casts by the model
                 // to make sure data type are same because validator may need to use
@@ -117,7 +117,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['numero'] = $attributes['numero'];
             $data['ano'] = $attributes['ano'];
             $data['casa_id'] = $attributes['casa_id'];
-            if(! empty($attributes['unidade_id'])){
+            if (!empty($attributes['unidade_id'])) {
                 $data['unidade_id'] = $attributes['unidade_id'];
             }
             $data['empresa_id'] = $attributes['empresa_id'];
@@ -125,7 +125,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['executado'] = $attributes['executado'];
             $data['data_inicio'] = $attributes['data_inicio'];
             $data['data_fim'] = $attributes['data_fim'];
-            if(! empty($attributes['comentario'])){
+            if (!empty($attributes['comentario'])) {
                 $data['comentario'] = $attributes['comentario'];
             }
             $gestores = $attributes['gestores'];
@@ -137,8 +137,8 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $model->gestores()->attach($gestores);
 
             return true;
-        }catch (\Exception $e){
-            flash()->error("Erro: ". $e->getMessage());
+        } catch (\Exception $e) {
+            flash()->error("Erro: " . $e->getMessage());
             return redirect()->route('contratos.index');
         }
     }
@@ -148,6 +148,20 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $model = $this->model->findOrFail($id);
         $model->fill($attributes);
         $model->save();
+    }
+
+    public function getByVencimento()
+    {
+        $todayWithDays = Carbon::now()->addDays(90);
+        $today = $todayWithDays->toDateString();
+
+        $query = $this->model->query();
+
+        $query->where('data_fim', '<', $today)
+              ->where('status', 'V');
+
+        return $query->with(['empresa', 'gestores'])->get();
+
     }
 
 }

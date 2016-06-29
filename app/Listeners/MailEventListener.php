@@ -25,19 +25,21 @@ class MailEventListener
 
     public function onDataLimite($event)
     {
-        $data = $event->getData();
+        $contratos = $event->getData()->toArray();
 
-        $this->mailer->send('email.notificacao', $data, function($message) use ($data){
-            $message->to($data['email'], $data['name'])->subject('Aviso de Vencimento de Contrato!');
-        });
+        foreach($contratos as $contrato){
+            $this->mailer->send('emails.vencimento', $contrato, function ($message) {
+                $message->to('angelo.neto@fiero.org.br')->subject('Aviso de Vencimento de Contrato!');
+            });
+        }
     }
 
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\MailSendNotification',
-            'App\Listeners\MailEventtListener@onDataLimite'
+            'CodeBase\Events\MailSendNotification',
+            'CodeBase\Listeners\MailEventListener@onDataLimite'
         );
     }
-    
+
 }

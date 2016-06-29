@@ -48,126 +48,112 @@
                     </div>
                     <div class="box-body table-responsive">
                         <div id="print">
-                            <div class="container-fluid">
+                            <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="row">
-                                            <div class="col-lg-8">
-                                                <img src="{{ asset('img/fiero.png') }}" width="260" alt="Sistema Fiero">
+                                    <div class="col-xs-8">
+                                        <img src="{{ asset('img/fiero.png') }}" width="260" alt="Sistema Fiero">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <b>Contrato Nº:</b> {{ $contrato->numero }} / {{ $contrato->ano }} <br>
+                                        <b>Vigência:</b> {{ $contrato->data_inicio }} até {{ $contrato->data_fim }} <br>
+                                        <b>Casa:</b> {{ $contrato->casa->nome }} <br>
+                                        @if(! empty($contrato->unidade_id))
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <b>Unidade:</b> {{ $contrato->unidade->nome }}
+                                                </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <b>Contrato Nº:</b> {{ $contrato->numero }}
-                                                        / {{ $contrato->ano }}
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <b>Vigência:</b> {{ $contrato->data_inicio }}
-                                                        até {{ $contrato->data_fim }}
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <b>Casa:</b> {{ $contrato->casa->nome }}
-                                                    </div>
-                                                </div>
-                                                @if(! empty($contrato->unidade_id))
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <b>Unidade:</b> {{ $contrato->unidade->nome }}
-                                                        </div>
-                                                    </div>
-                                                @endif
+                                        @endif
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Informações do Fornecedor / Prestador de Serviço</h4>
                                             </div>
-                                        </div>
-                                        <br>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <fieldset>
-                                                    <legend>Fornecedor / Prestador de Serviço</legend>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            <b>Tipo: </b>{{ $tipo[$contrato->empresa->tipo_pessoa] }}
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            @if(strlen($contrato->empresa->cpf_cnpj) == 14)
-                                                                <b>CNPJ: </b>{{ mask('##.###.###/####-##', $contrato->empresa->cpf_cnpj) }}
-
-                                                            @else
-                                                                <b>CPF: </b>{{ mask('###.###.###-##', $contrato->empresa->cpf_cnpj) }}
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <b>Razão Social: </b>{{ $contrato->empresa->razao }}
-                                                        </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <b>Tipo: </b> <br>{{ $tipo[$contrato->empresa->tipo_pessoa] }}
                                                     </div>
-                                                    <br>
+                                                    <div class="col-xs-4">
+                                                        @if(strlen($contrato->empresa->cpf_cnpj) == 14)
+                                                            <b>CNPJ: </b>
+                                                            <br>{{ mask('##.###.###/####-##', $contrato->empresa->cpf_cnpj) }}
 
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <b>Responsável: </b>{{ $contrato->empresa->responsavel }}
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <b>E-mail: </b>{{ $contrato->empresa->email }}
-                                                        </div>
+                                                        @else
+                                                            <b>CPF: </b>
+                                                            <br>{{ mask('###.###.###-##', $contrato->empresa->cpf_cnpj) }}
+                                                        @endif
                                                     </div>
-                                                </fieldset>
+                                                    <div class="col-xs-4">
+                                                        <b>Razão Social: </b> <br>{{ $contrato->empresa->razao }}
+                                                    </div>
+                                                </div>
+                                                <br>
+
+                                                <div class="row">
+                                                    <div class="col-xs-5">
+                                                        <b>Responsável: </b> <br>{{ $contrato->empresa->responsavel }}
+                                                    </div>
+                                                    <div class="col-xs-5">
+                                                        <b>E-mail: </b> <br>{{ $contrato->empresa->email }}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <br>
+                                    </div>
+                                </div>
+                                <br>
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <fieldset>
-                                                    <legend>Informações do Contrato</legend>
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <b>Valor
-                                                                Homologado: </b>R$ {{ number_format($contrato->homologado, 2, ',', '.') }}
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <b>Valor
-                                                                Homologado: </b>R$ {{ number_format($contrato->executado, 2, ',', '.') }}
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <b>Situação do
-                                                                Contrato: </b>{{ $status[$contrato->status] }}
-                                                        </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Informações do Contrato</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <b>Valor Homologado: </b>
+                                                        <br>R$ {{ number_format($contrato->homologado, 2, ',', '.') }}
                                                     </div>
-                                                    <br>
-
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <table class="table table-bordered table-striped table-condensed">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>Gestores do Contrato:</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                @foreach($contrato->gestores as $gestor)
-                                                                    <tr>
-                                                                        <td>{{ $gestor->name }}</td>
-                                                                    </tr>
-                                                                @endforeach
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                                    <div class="col-xs-4">
+                                                        <b>Valor Executado: </b>
+                                                        <br>R$ {{ number_format($contrato->executado, 2, ',', '.') }}
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <b>Comentários: </b> <br>
-
-                                                            <div>
-                                                                {!! nl2br($contrato->comentario) !!}
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-xs-4">
+                                                        <b>Situação do Contrato: </b>
+                                                        <br>{{ $status[$contrato->status] }}
                                                     </div>
-                                                </fieldset>
+                                                </div>
+                                                <br>
+
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <b>Informações: </b> <br>
+                                                        {!! nl2br($contrato->comentario) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / end client details section -->
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default no-margin">
+                                            <div class="panel-heading">
+                                                <h4>Gestores do Contrato</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                @foreach($contrato->gestores as $gestor)
+                                                    {{ $gestor->name }},
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>

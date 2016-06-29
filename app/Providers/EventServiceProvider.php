@@ -13,9 +13,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'CodeBase\Events\SomeEvent' => [
-            'CodeBase\Listeners\EventListener',
-        ],
+        //
+    ];
+
+    protected $subscribe = [
+        'CodeBase\Listeners\MailEventListener'
     ];
 
     /**
