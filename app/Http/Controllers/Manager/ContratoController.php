@@ -47,7 +47,7 @@ class ContratoController extends BaseController
             abort(403);
         }
 
-        if (! auth()->user()->is_super == 1) {
+        if (!auth()->user()->is_super == 1) {
             $contratos = $this->contratos->with(['empresa', 'gestores', 'casa'])->all();
             $status = Status::getConstants();
 
@@ -103,14 +103,10 @@ class ContratoController extends BaseController
             abort(403);
         }
 
-        $result = $this->contratos->create($request->all());
+        $this->contratos->create($request->all());
 
-        if ($result) {
-            flash()->success('Cadastro Realizado com sucesso!');
-            return redirect()->route('contratos.index');
-        }
-
-        return null;
+        flash()->success('Cadastro Realizado com sucesso!');
+        return redirect()->route('contratos.index');
     }
 
     /*
@@ -138,7 +134,7 @@ class ContratoController extends BaseController
 
     public function edit($id)
     {
-        try{
+        try {
 
             if (!auth()->user()->can('editar-contratos')) {
                 abort(403);
@@ -147,13 +143,13 @@ class ContratoController extends BaseController
             $contrato = $this->contratos->with('gestores')->find($id);
             $users = $this->users->all(['name', 'id']);
             $gestores = [];
-            foreach($contrato->gestores->toArray() as $gestor){
+            foreach ($contrato->gestores->toArray() as $gestor) {
                 $gestores[] = $gestor['id'];
             }
 
             return view('pages.contratos.edit', compact('contrato', 'users', 'gestores'));
 
-        }catch (ModelNotFoundException $e){
+        } catch (ModelNotFoundException $e) {
             flash()->error('Erro: ' . $e->getMessage());
             return redirect()->route('contratos.index');
         }
@@ -161,7 +157,7 @@ class ContratoController extends BaseController
 
     public function update($id, Request $request)
     {
-        try{
+        try {
 
             if (!auth()->user()->can('editar-contratos')) {
                 abort(403);
@@ -171,7 +167,7 @@ class ContratoController extends BaseController
 
             flash()->success('Contrato atualizado com sucesso!');
             return redirect()->route('contratos.index');
-        }catch (ModelNotFoundException $e){
+        } catch (ModelNotFoundException $e) {
             flash()->error('Erro: ' . $e->getMessage());
             return redirect()->route('contratos.index');
         }
@@ -179,7 +175,7 @@ class ContratoController extends BaseController
 
     public function getStatus($id)
     {
-        try{
+        try {
 
             if (!auth()->user()->can('status-contratos')) {
                 abort(403);
@@ -191,7 +187,7 @@ class ContratoController extends BaseController
 
             return view('pages.contratos.status', compact('contrato', 'status'));
 
-        }catch (ModelNotFoundException $e){
+        } catch (ModelNotFoundException $e) {
             flash()->error('Erro: ' . $e->getMessage());
             return redirect()->route('contratos.index');
         }
@@ -199,7 +195,7 @@ class ContratoController extends BaseController
 
     public function postStatus(Request $request, $id)
     {
-        try{
+        try {
             if (!auth()->user()->can('status-contratos')) {
                 abort(403);
             }
@@ -209,7 +205,7 @@ class ContratoController extends BaseController
             flash()->success('Status atualizado com sucesso!');
             return redirect()->route('contratos.index');
 
-        }catch (ModelNotFoundException $e){
+        } catch (ModelNotFoundException $e) {
             flash()->error('Erro: ' . $e->getMessage());
             return redirect()->route('contratos.index');
         }

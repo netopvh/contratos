@@ -25,8 +25,8 @@ class CreateContratosTable extends Migration
             $table->decimal('executado',10,2);
             $table->integer('empresa_id')->unsigned();
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade');
-            $table->date('data_inicio');
-            $table->date('data_fim');
+            $table->timestamp('data_inicio');
+            $table->timestamp('data_fim');
             $table->enum('status',Status::getKeys());
             $table->longText('comentario');
             $table->timestamps();

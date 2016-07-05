@@ -8,7 +8,7 @@ use Auth, Adldap;
 use CodeBase\Repositories\Contrato\ContratoRepositoryEloquent;
 use CodeBase\Events\MailSendNotification;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class HomeController extends BaseController
 {
@@ -37,7 +37,7 @@ class HomeController extends BaseController
     {
         $contratos = $this->contratos->getByVencimento();
 
-        Event::fire(new MailSendNotification($contratos));
+        //Event::fire(new MailSendNotification($contratos));
 
         return view('home', compact('contratos'));
     }

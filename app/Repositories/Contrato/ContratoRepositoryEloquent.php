@@ -64,14 +64,6 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
     public function create(array $attributes)
     {
         try {
-            if (!is_null($this->validator)) {
-                // we should pass data that has been casts by the model
-                // to make sure data type are same because validator may need to use
-                // this data to compare with data that fetch from database.
-                $attributes = $this->model->newInstance()->forceFill($attributes)->toArray();
-
-                $this->validator->with($attributes)->passesOrFail(ValidatorInterface::RULE_CREATE);
-            }
 
             $data['numero'] = $attributes['numero'];
             $data['ano'] = $attributes['ano'];
@@ -82,12 +74,15 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['empresa_id'] = $attributes['empresa_id'];
             $data['homologado'] = $attributes['homologado'];
             $data['executado'] = $attributes['executado'];
-            $data['data_inicio'] = $attributes['data_inicio'];
+            $data['data_inicio'] = date('Y-m-d', strtotime($attributes['data_inicio']));
+            //$data['data_inicio'] = $attributes['data_inicio'];
             $data['data_fim'] = $attributes['data_fim'];
             if (!empty($attributes['comentario'])) {
                 $data['comentario'] = $attributes['comentario'];
             }
             $gestores = $attributes['gestores'];
+
+            dd($data);
 
             $contrato = $this->model->newInstance($data);
             $contrato->save();
