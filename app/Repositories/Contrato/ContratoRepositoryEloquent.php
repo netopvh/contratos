@@ -74,15 +74,14 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['empresa_id'] = $attributes['empresa_id'];
             $data['homologado'] = $attributes['homologado'];
             $data['executado'] = $attributes['executado'];
-            $data['data_inicio'] = date('Y-m-d', strtotime($attributes['data_inicio']));
-            //$data['data_inicio'] = $attributes['data_inicio'];
+            $data['data_inicio'] = $attributes['data_inicio'];
             $data['data_fim'] = $attributes['data_fim'];
             if (!empty($attributes['comentario'])) {
                 $data['comentario'] = $attributes['comentario'];
             }
             $gestores = $attributes['gestores'];
 
-            dd($data);
+            //dd($data);
 
             $contrato = $this->model->newInstance($data);
             $contrato->save();

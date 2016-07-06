@@ -73,8 +73,7 @@ class Contrato extends Model
     {
         if(strlen($value) > 0){
             try{
-                //return $this->attributes['data_inicio'] = Carbon::createFromFormat('d/m/Y', $value);
-                return $this->attributes['data_inicio'] = date('Y-m-d', strtotime($value));
+                return $this->attributes['data_inicio'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
 
             }catch (\Exception $e){
                 return $this->attributes['data_inicio'] = date('Y-m-d');
@@ -90,9 +89,16 @@ class Contrato extends Model
 
     public function setDataFimAttribute($value)
     {
+        if(strlen($value) > 0){
+            try{
+                return $this->attributes['data_fim'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
 
+            }catch (\Exception $e){
+                return $this->attributes['data_fim'] = date('Y-m-d');
+            }
+        }
+        return null;
     }
-
 
     public function getDataFimAttribute($value)
     {
