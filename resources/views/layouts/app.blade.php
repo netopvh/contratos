@@ -8,10 +8,14 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <link rel="stylesheet" href="{{ asset(elixir('css/default.css')) }}">
+    <link rel="stylesheet" href="{{ asset('plugins/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/AdminLTE/dist/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }}">
     @yield('styles-after')
     @yield('styles-before')
-    <link rel="stylesheet" href="{{ asset(elixir('css/custom.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,13 +50,15 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-<script src="{{ asset(elixir('js/default.js')) }}"></script>
+<script src="{{ asset('plugins/jQuery/jquery.min.js') }}"></script>
+<script src="{{ asset('plugins/AdminLTE/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 @yield('scripts-after')
 @yield('scripts-before')
-<script src="{{ asset(elixir('js/app.js')) }}"></script>
+<script src="{{ asset('plugins/AdminLTE/dist/js/app.js') }}"></script>
+<script src="{{ asset('js/default.js') }}"></script>
 
 </body>
 </html>

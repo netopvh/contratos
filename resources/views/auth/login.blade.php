@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="{{ asset(elixir('css/default.css')) }}">
     <link rel="stylesheet" href="{{ asset('plugins/AdminLTE/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.cs') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/Ionicons/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/AdminLTE/dist/css/AdminLTE.min.css') }}">
     @yield('styles-after')
