@@ -2,7 +2,7 @@
 
 namespace CodeBase\Events;
 
-use CodeBase\Events\Event;
+
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 

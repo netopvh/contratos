@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <label>Data Início</label>
@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-md-3">
             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Pesquisar Contrato

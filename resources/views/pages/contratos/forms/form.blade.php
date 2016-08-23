@@ -109,13 +109,13 @@
         <div class="form-group">
             {!! Form::label('gestores', 'Gestores do Contrato:') !!} <span class="text-danger">*</span>
             @if(isset($contrato->gestores))
-                <select name="gestores[]" class="form-control select2" multiple>
+                <select name="gestores[]" class="form-control select2" multiple required>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}"{{ in_array($user->id, $gestores) ? ' selected="selected"' : '' }}>{{ $user->name }}</option>
                     @endforeach
                 </select>
             @else
-                <select name="gestores[]" class="form-control select2" multiple>
+                <select name="gestores[]" class="form-control select2" multiple required>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach

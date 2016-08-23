@@ -3,6 +3,8 @@
 
 namespace CodeBase\Repositories\Contrato;
 
+use CodeBase\Models\Casa;
+use Illuminate\Container\Container as Application;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeBase\Repositories\Contrato\ContratoRepository;
@@ -13,6 +15,23 @@ use Carbon\Carbon;
 
 class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepository
 {
+
+    protected $casa;
+
+    /**
+     * Injeta o repository da Casa
+     *
+     * @inject
+     */
+    public function __construct(
+        Casa $casa,
+        Application $app
+    )
+    {
+        parent::__construct($app);
+        $this->app = $app;
+        $this->casa = $casa;
+    }
 
     /**
      * Especifica o nome da Classe Model
@@ -86,8 +105,6 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         }
         $gestores = $attributes['gestores'];
 
-        //dd($data);
-
         $contrato = $this->model->newInstance($data);
         $contrato->save();
         $this->resetModel();
@@ -139,6 +156,25 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $model->save();
     }
 
+    public function getByVencimentoFilter()
+    {
+        $todayWithDays = Carbon::now()->addDays(90);
+        $today = $todayWithDays->toDateString();
+
+        $query = $this->model->query();
+
+        $casa = $this->casa->where('nome', 'like', auth()->user()->casa)->first();
+
+        if(empty($casa)){
+            $query->where('data_fim', '<', $today)
+                ->where('status', 'V')
+                ->where('casa_id', $casa->id);
+        }
+
+         return $query->with(['empresa', 'gestores','casa'])->get();
+
+    }
+
     public function getByVencimento()
     {
         $todayWithDays = Carbon::now()->addDays(90);
@@ -149,7 +185,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $query->where('data_fim', '<', $today)
             ->where('status', 'V');
 
-        return $query->with(['empresa', 'gestores'])->get();
+        return $query->with(['empresa', 'gestores','casa'])->get();
 
     }
 

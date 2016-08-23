@@ -13,6 +13,7 @@
     <script src="{{ asset('plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js') }}"></script>
     <script src="{{ asset('plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-validation/dist/additional-methods.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-validation/src/localization/messages_pt_BR.js') }}"></script>
     <script src="{{ asset('plugins/jquery-maskmoney/dist/jquery.maskMoney.min.js') }}"></script>
     <script>
         $(function(){

@@ -35,9 +35,13 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        $contratos = $this->contratos->getByVencimento();
+        if(!auth()->user()->is_super == 1){
+            $contratos = $this->contratos->getByVencimentoFilter();
+        }else{
+            $contratos = $this->contratos->getByVencimento();
+        }
 
-        //Event::fire(new MailSendNotification($contratos));
+        Event::fire(new MailSendNotification($contratos));
 
         return view('home', compact('contratos'));
     }

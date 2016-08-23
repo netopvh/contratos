@@ -5,6 +5,7 @@ namespace CodeBase\Http\Controllers\Manager;
 use Adldap\Exceptions\ModelNotFoundException;
 use CodeBase\Enum\TipoPessoa;
 use CodeBase\Http\Controllers\BaseController;
+use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Http\Request;
 use CodeBase\Http\Requests;
 use CodeBase\Repositories\Contrato\ContratoRepositoryEloquent;
@@ -48,9 +49,8 @@ class ContratoController extends BaseController
         }
 
         if (!auth()->user()->is_super == 1) {
-            $contratos = $this->contratos->with(['empresa', 'gestores', 'casa'])->all();
+            $contratos = $this->contratos->getByVencimentoFilter();
             $status = Status::getConstants();
-
         }
 
         return view('pages.contratos.index', compact('contratos', 'status'));
@@ -63,7 +63,7 @@ class ContratoController extends BaseController
      */
     public function lists(Request $request)
     {
-        if (!auth()->user()->can('ver-contratos')) {
+        if (!auth()->user()->can('ver-movimentos')) {
             abort(403);
         }
 
@@ -99,14 +99,19 @@ class ContratoController extends BaseController
      */
     public function store(Request $request)
     {
-        if (!auth()->user()->can('add-contratos')) {
-            abort(403);
+        try{
+            if (!auth()->user()->can('add-contratos')) {
+                abort(403);
+            }
+
+            $this->contratos->create($request->all());
+
+            flash()->success('Cadastro Realizado com sucesso!');
+            return redirect()->route('contratos.index');
+        }catch (ValidationException $e){
+            flash()->error('Erro:' . $e->getMessage());
+            return redirect()->route('contratos.create');
         }
-
-        $this->contratos->create($request->all());
-
-        flash()->success('Cadastro Realizado com sucesso!');
-        return redirect()->route('contratos.index');
     }
 
     /*

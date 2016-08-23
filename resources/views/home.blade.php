@@ -57,6 +57,7 @@
                                     <th>Numero do Contrato</th>
                                     <th>CPF / CNPJ</th>
                                     <th>Fornecedor</th>
+                                    <th>Casa</th>
                                     <th>Vencimento</th>
                                     <th width="60">Ação</th>
                                 </tr>
@@ -76,6 +77,7 @@
                                                     {{ mask('###.###.###-##', $contrato->empresa->cpf_cnpj) }}
                                                 @endif</td>
                                             <td>{{ $contrato->empresa->razao }}</td>
+                                            <td>{{ $contrato->casa->nome }}</td>
                                             <td>{{ $contrato->data_fim }}</td>
                                             <td>
                                                 @permission('visualizar-contratos')
