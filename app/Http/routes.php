@@ -130,4 +130,6 @@ Route::group(['prefix' => 'contratos', 'namespace' => 'Manager'], function(){
     Route::patch('/{id}', 'ContratoController@update')->name('contratos.update');
     Route::get('/status/{id}', 'ContratoController@getStatus')->name('contratos.status');
     Route::patch('/status/{id}','ContratoController@postStatus');
+    Route::get('/aditivar', 'ContratoController@aditivarIndex')->name('contratos.aditivar.index');
+    Route::get('/aditivar/search', 'ContratoController@contratoSearch')->name('contratos.aditivar.api');
 });

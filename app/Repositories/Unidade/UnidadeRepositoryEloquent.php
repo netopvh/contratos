@@ -3,14 +3,17 @@
 
 namespace CodeBase\Repositories\Unidade;
 
+use Prettus\Repository\Contracts\CacheableInterface;
+use Prettus\Repository\Traits\CacheableRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeBase\Repositories\Unidade\UnidadeRepository;
 use CodeBase\Models\Unidade;
 use CodeBase\Validators\UnidadeValidator;
 
-class UnidadeRepositoryEloquent extends BaseRepository implements UnidadeRepository
+class UnidadeRepositoryEloquent extends BaseRepository implements CacheableInterface
 {
+
+    use CacheableRepository;
 
     /**
      * Specify Model class name

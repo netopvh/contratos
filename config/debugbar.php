@@ -98,8 +98,8 @@ return array(
         'symfony_request' => true,  // Only one can be enabled..
         'mail'            => true,  // Catch mail messages
         'logs'            => false, // Add the latest log messages
-        'files'           => false, // Show the included files
-        'config'          => false, // Display config settings
+        'files'           => true, // Show the included files
+        'config'          => true, // Display config settings
         'auth'            => false, // Display Laravel authentication status
         'gate'            => false, // Display Laravel Gate checks
         'session'         => true,  // Display session data

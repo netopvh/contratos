@@ -12,6 +12,7 @@ use CodeBase\Repositories\Contrato\ContratoRepositoryEloquent;
 use CodeBase\Enum\Status;
 use Debubar;
 use CodeBase\Repositories\User\UserRepositoryEloquent;
+use Psy\Exception\ErrorException;
 
 
 class ContratoController extends BaseController
@@ -99,7 +100,7 @@ class ContratoController extends BaseController
      */
     public function store(Request $request)
     {
-        try{
+        try {
             if (!auth()->user()->can('add-contratos')) {
                 abort(403);
             }
@@ -108,7 +109,7 @@ class ContratoController extends BaseController
 
             flash()->success('Cadastro Realizado com sucesso!');
             return redirect()->route('contratos.index');
-        }catch (ValidationException $e){
+        } catch (ValidationException $e) {
             flash()->error('Erro:' . $e->getMessage());
             return redirect()->route('contratos.create');
         }
@@ -214,6 +215,41 @@ class ContratoController extends BaseController
             flash()->error('Erro: ' . $e->getMessage());
             return redirect()->route('contratos.index');
         }
+    }
+
+    public function aditivarIndex()
+    {
+        return view('pages.contratos.aditivar');
+    }
+
+    public function contratoSearch(Request $request)
+    {
+        try{
+            $data = $request->get('contrato');
+            $value = explode('/', $data);
+            if(count($value) < 2){
+                flash()->error('Digite o Numero do contrato e o Ano');
+                return redirect()->route('contratos.aditivar.index');
+            }
+            $numero = $value[0];
+            $ano = $value[1];
+
+            $contrato = $this->contratos->findWhere([
+                'numero' => $numero,
+                'ano' => $ano
+            ])->first();
+
+            if(is_null($contrato)){
+                flash()->error('Nenhum contato localizado!');
+                return redirect()->route('contratos.aditivar.index');
+            }
+
+            return view('');
+        }catch (ErrorException $e){
+            flash()->error($e->getMessage());
+            return redirect()->route('contratos.aditivar.api');
+        }
+
     }
 
 }

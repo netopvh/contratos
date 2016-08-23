@@ -8,14 +8,17 @@
 
 namespace CodeBase\Repositories\PermissionGroup;
 
+use Prettus\Repository\Contracts\CacheableInterface;
+use Prettus\Repository\Traits\CacheableRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeBase\Models\PermissionGroup;
 use CodeBase\Validators\PermissionGroupValidator;
-use Codebase\Repositories\PermissionGroup\PermissionGroupRepository;
 
-class PermissionGroupRepositoryEloquent extends BaseRepository
+class PermissionGroupRepositoryEloquent extends BaseRepository implements CacheableInterface
 {
+
+    use CacheableRepository;
     /**
      * Specify Model class name
      *

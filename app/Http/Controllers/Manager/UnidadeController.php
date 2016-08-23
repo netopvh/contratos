@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use CodeBase\Http\Requests;
 use CodeBase\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class UnidadeController extends BaseController

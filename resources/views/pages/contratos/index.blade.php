@@ -70,7 +70,7 @@
                                 </a>
                                 @endpermission
                                 @permission('aditivar-contratos')
-                                <a href="{{ route('casas.create') }}" class="btn btn-bitbucket">
+                                <a href="{{ route('contratos.aditivar.index') }}" class="btn btn-bitbucket">
                                     <i class="fa fa-newspaper-o"></i>
                                     Aditivar Contrato
                                 </a>

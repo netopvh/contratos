@@ -41,7 +41,7 @@ class HomeController extends BaseController
             $contratos = $this->contratos->getByVencimento();
         }
 
-        Event::fire(new MailSendNotification($contratos));
+        //Event::fire(new MailSendNotification($contratos));
 
         return view('home', compact('contratos'));
     }

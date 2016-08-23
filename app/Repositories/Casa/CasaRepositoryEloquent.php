@@ -3,14 +3,17 @@
 
 namespace CodeBase\Repositories\Casa;
 
+use Prettus\Repository\Contracts\CacheableInterface;
+use Prettus\Repository\Traits\CacheableRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeBase\Repositories\Casa\CasaRepository;
 use CodeBase\Models\Casa;
 use CodeBase\Validators\CasaValidator;
 
-class CasaRepositoryEloquent extends BaseRepository implements CasaRepository
+class CasaRepositoryEloquent extends BaseRepository implements CacheableInterface
 {
+
+    use CacheableRepository;
 
     /**
      * Specify Model class name
