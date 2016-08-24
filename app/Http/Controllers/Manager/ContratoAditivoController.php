@@ -2,6 +2,7 @@
 
 namespace CodeBase\Http\Controllers\Manager;
 
+use CodeBase\Http\Controllers\BaseController;
 use CodeBase\Repositories\ContratoAditivo\ContratoAditivoRepositoryEloquent;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ use CodeBase\Http\Requests;
 use CodeBase\Http\Controllers\Controller;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class ContratoAditivoController extends Controller
+class ContratoAditivoController extends BaseController
 {
 
     protected $repository;

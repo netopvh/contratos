@@ -134,3 +134,14 @@ Route::group(['prefix' => 'contratos', 'namespace' => 'Manager'], function(){
     Route::get('/aditivar/search', 'ContratoController@contratoSearch')->name('contratos.aditivar.api');
     Route::post('/aditivar/store', 'ContratoAditivoController@store')->name('contratos.aditivar.store');
 });
+
+/*
+ * Ações Relacionadas aos relatórios do Sistema
+ */
+
+Route::group(['prefix' => 'report', 'namespace' => 'Report'], function(){
+    Route::get('/', 'RepContratoController@index')->name('report.index');
+    Route::get('/date', 'RepContratoController@byData')->name('report.data');
+    Route::post('/date', 'RepContratoController@searchData')->name('report.data.print');
+
+});

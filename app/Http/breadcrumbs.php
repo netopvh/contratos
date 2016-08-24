@@ -180,3 +180,20 @@ Breadcrumbs::register('contratos.status', function($breadcrumbs) {
 /*
  * Fim Contratos
  */
+
+/*
+ * Inicio Relatorios
+ */
+
+Breadcrumbs::register('relatorios.index', function($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Relatorios', route('report.index'));
+});
+
+Breadcrumbs::register('relatorios.data', function($breadcrumbs) {
+    $breadcrumbs->parent('relatorios.index');
+    $breadcrumbs->push('Por Data', route('report.data'));
+});
+/*
+ * Fim Relatorios
+ */

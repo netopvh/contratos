@@ -44,10 +44,10 @@
                 </ul>
             </li>
             @endpermission
-            <li class="treeview {{ arUrlActive(['relatorios']) }}">
+            <li class="treeview {{ arUrlActive(['report']) }}">
                 <a href="#"><i class="fa fa-folder-open"></i> <span>Relatórios</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li class="{{ isUrlActive('contratos') }}"><a href="{{ route('contratos.index') }}"><i class="fa fa-file-excel-o"></i> Contratos</a></li>
+                    <li class="{{ isUrlActive('report') }}"><a href="{{ route('report.index') }}"><i class="fa fa-file-excel-o"></i> Contratos</a></li>
                 </ul>
             </li>
 
