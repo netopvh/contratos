@@ -5,6 +5,7 @@ namespace CodeBase\Http\Controllers\Manager;
 use Adldap\Exceptions\ModelNotFoundException;
 use CodeBase\Enum\TipoPessoa;
 use CodeBase\Http\Controllers\BaseController;
+use CodeBase\Repositories\ContratoAditivo\ContratoAditivoRepositoryEloquent;
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Http\Request;
 use CodeBase\Http\Requests;
@@ -29,15 +30,24 @@ class ContratoController extends BaseController
     protected $users;
 
     /*
+     *
+     */
+    protected $aditivos;
+
+    /*
      * Injeta o Repositório no Controller
      *
      * @inject
      */
-    public function __construct(ContratoRepositoryEloquent $contratos, UserRepositoryEloquent $users)
+    public function __construct(
+        ContratoRepositoryEloquent $contratos,
+        UserRepositoryEloquent $users,
+        ContratoAditivoRepositoryEloquent $aditivos)
     {
         parent::__construct();
         $this->contratos = $contratos;
         $this->users = $users;
+        $this->aditivos = $aditivos;
     }
 
     /*
@@ -244,9 +254,9 @@ class ContratoController extends BaseController
                 return redirect()->route('contratos.aditivar.index');
             }
 
-            //dd($contrato);
+            $aditivos = $this->aditivos->findWhere(['contrato_id' => $contrato->id]);
 
-            return view('pages.contratos.forms.aditivo', compact('contrato'));
+            return view('pages.contratos.forms.aditivo', compact('contrato','aditivos'));
         }catch (ErrorException $e){
             flash()->error($e->getMessage());
             return redirect()->route('contratos.aditivar.api');
