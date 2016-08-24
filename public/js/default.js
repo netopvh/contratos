@@ -156,6 +156,33 @@ $("#contratoForm").validate({
     }
 });
 
+$("#aditivoForm").validate({
+    rules: {
+        ano: "required",
+        homologado: "required",
+        executado: "required",
+        inicio: "required",
+        fim: "required"
+    },
+    messages: {
+        ano: {
+            required: "Ano é obrigatório!"
+        },
+        homologado: {
+            required: "Campo obrigatório!"
+        },
+        executado: {
+            required: "Campo obrigatório!"
+        },
+        inicio: {
+            required: "Campo obrigatório!"
+        },
+        fim: {
+            required: "Campo obrigatório!"
+        }
+    }
+});
+
 //Configurações do Contrato Form
 
 $('.select2').select2({

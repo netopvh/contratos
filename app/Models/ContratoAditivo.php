@@ -9,4 +9,9 @@ class ContratoAditivo extends Model
     protected $fillable = [
         'contrato_id', 'ano', 'inicio', 'fim', 'homologado', 'executado','comentario'
     ];
+
+    public function contrato()
+    {
+        $this->belongsTo(Contrato::class,'contrato');
+    }
 }

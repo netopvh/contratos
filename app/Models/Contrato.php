@@ -55,6 +55,11 @@ class Contrato extends Model
         return $this->belongsTo(Unidade::class);
     }
 
+    public function aditivo()
+    {
+        $this->belongsTo(ContratoAditivo::class,'contrato_id','id');
+    }
+
     public function scopeSearch($query, $keyword)
     {
         if (is_array($keyword)) {

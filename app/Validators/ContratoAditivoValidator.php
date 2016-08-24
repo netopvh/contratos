@@ -8,8 +8,22 @@ use \Prettus\Validator\LaravelValidator;
 class ContratoAditivoValidator extends LaravelValidator {
 
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'contrato_id' => 'required',
+            'ano' => 'required',
+            'inicio' => 'required',
+            'fim' => 'required',
+            'homologado' => 'required',
+            'executado' => 'required'
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'contrato_id' => 'required',
+            'ano' => 'required',
+            'inicio' => 'required',
+            'fim' => 'required',
+            'homologado' => 'required',
+            'executado' => 'required'
+        ],
    ];
 
 }

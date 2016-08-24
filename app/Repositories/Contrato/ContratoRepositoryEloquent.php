@@ -158,6 +158,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
     public function getByVencimentoFilter()
     {
+
         $todayWithDays = Carbon::now()->addDays(90);
         $today = $todayWithDays->toDateString();
 

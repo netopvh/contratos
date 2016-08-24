@@ -22,7 +22,7 @@
             <li class="{{ isUrlActive('/') }}"><a href="{{ route('home') }}"><i class="fa fa-home"></i> <span>Home</span></a></li>
             @permission('ver-cadastros')
             <li class="treeview {{ arUrlActive(['casas','unidades','empresas']) }}">
-                <a href="#"><i class="fa fa-folder-open"></i> <span>Cadastros</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-plus-square"></i> <span>Cadastros</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @permission('ver-casas')
                     <li class="{{ isUrlActive('casas') }}"><a href="{{ route('casas.index') }}"><i class="fa fa-institution"></i> Casas</a></li>
@@ -38,12 +38,18 @@
             @endpermission
             @permission('ver-movimentos')
             <li class="treeview {{ arUrlActive(['contratos']) }}">
-                <a href="#"><i class="fa fa-folder-open"></i> <span>Movimentação</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class="fa fa-history"></i> <span>Movimentação</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li class="{{ isUrlActive('contratos') }}"><a href="{{ route('contratos.index') }}"><i class="fa fa-institution"></i> Contratos</a></li>
+                    <li class="{{ isUrlActive('contratos') }}"><a href="{{ route('contratos.index') }}"><i class="fa fa-paperclip"></i> Contratos</a></li>
                 </ul>
             </li>
             @endpermission
+            <li class="treeview {{ arUrlActive(['relatorios']) }}">
+                <a href="#"><i class="fa fa-folder-open"></i> <span>Relatórios</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="{{ isUrlActive('contratos') }}"><a href="{{ route('contratos.index') }}"><i class="fa fa-file-excel-o"></i> Contratos</a></li>
+                </ul>
+            </li>
 
         </ul>
         @permission('ver-admin')

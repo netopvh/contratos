@@ -31,14 +31,24 @@
                     <div class="box-body table-responsive">
                         <div class="row">
                             <div class="col-md-10">
-                                <a href="{{ route('casas.create') }}" class="btn btn-primary">
+                                @permission('add-contratos')
+                                <a href="{{ route('contratos.create') }}" class="btn btn-bitbucket">
                                     <i class="fa fa-plus-circle"></i>
                                     Cadastrar Contrato
                                 </a>
-                                <a href="{{ route('casas.create') }}" class="btn btn-primary">
+                                @endpermission
+                                @permission('aditivar-contratos')
+                                <a href="{{ route('contratos.aditivar.index') }}" class="btn btn-bitbucket">
                                     <i class="fa fa-newspaper-o"></i>
                                     Aditivar Contrato
                                 </a>
+                                @endpermission
+                                @permission('exportar-contratos')
+                                <a href="{{ route('casas.create') }}" class="btn btn-bitbucket">
+                                    <i class="fa fa-file-excel-o"></i>
+                                    Exportar Excel
+                                </a>
+                                @endpermission
                                 <a href="{{ route('contratos.index') }}" class="btn btn-primary">
                                     <i class="fa fa-search"></i>
                                     Pesquisar
@@ -80,18 +90,24 @@
                                             <td>{{ $contrato->data_fim }}</td>
                                             <td>{{ $status[$contrato->status] }}</td>
                                             <td>
+                                                @permission('visualizar-contratos')
                                                 <a href="{{ route('contratos.view', $contrato->id) }}"
                                                    class="btn-sm btn-microsoft" data-toggle="tooltip" title="Visualizar">
                                                     <i class="fa fa-eye"></i>
                                                 </a>&nbsp;
+                                                @endpermission
+                                                @permission('editar-contratos')
                                                 <a href="{{ route('contratos.edit', $contrato->id) }}" class="btn-sm btn-bitbucket" data-toggle="tooltip"
                                                    title="Editar">
                                                     <i class="fa fa-edit"></i>
                                                 </a>&nbsp;
+                                                @endpermission
+                                                @permission('status-contratos')
                                                 <a href="{{ route('contratos.status', $contrato->id) }}" class="btn-sm btn-google" data-toggle="tooltip"
                                                    title="Status">
                                                     <i class="fa fa-tags"></i>
                                                 </a>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @endforeach

@@ -24,6 +24,9 @@ class CasaTableSeeder extends Seeder
             ],
             [
                 'nome' => 'IEL'
+            ],
+            [
+                'nome' => 'SESI/SENAI'
             ]
         ]);
     }

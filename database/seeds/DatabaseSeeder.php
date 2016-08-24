@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionGroupTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
         $this->call(CasaTableSeeder::class);
-        $this->call(EmpresaTableSeeder::class);
+        //$this->call(EmpresaTableSeeder::class);
         //$this->call(ContratoTableSeeder::class);
-        $this->call(UnidadeTableSeeder::class);
+        //$this->call(UnidadeTableSeeder::class);
     }
 }

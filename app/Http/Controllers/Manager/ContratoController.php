@@ -234,7 +234,7 @@ class ContratoController extends BaseController
             $numero = $value[0];
             $ano = $value[1];
 
-            $contrato = $this->contratos->findWhere([
+            $contrato = $this->contratos->with(['empresa'])->findWhere([
                 'numero' => $numero,
                 'ano' => $ano
             ])->first();
@@ -244,7 +244,9 @@ class ContratoController extends BaseController
                 return redirect()->route('contratos.aditivar.index');
             }
 
-            return view('');
+            //dd($contrato);
+
+            return view('pages.contratos.forms.aditivo', compact('contrato'));
         }catch (ErrorException $e){
             flash()->error($e->getMessage());
             return redirect()->route('contratos.aditivar.api');
