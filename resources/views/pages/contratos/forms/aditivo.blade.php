@@ -32,10 +32,9 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Novo
-                    Aditivo</a></li>
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Aditivar Contrato</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
-                                       data-toggle="tab">Registros</a></li>
+                                       data-toggle="tab">Todos os Aditivos</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -87,13 +86,13 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label>Data Fim:</label>
+                                                <label>Data de Fim:</label>
                                                 <input type="text" id="fim" name="fim" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                {!! Form::label('valor_homologado', 'Valor Homologado:') !!} <span
+                                                {!! Form::label('valor_homologado', 'Valor Mensal:') !!} <span
                                                         class="text-danger">*</span>
                                                 {!! Form::text('homologado', null, [
                                                 'class' => 'form-control',
@@ -106,7 +105,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                {!! Form::label('valor_executado', 'Valor Executado:') !!} <span
+                                                {!! Form::label('valor_executado', 'Valor Total:') !!} <span
                                                         class="text-danger">*</span>
                                                 {!! Form::text('executado', null, [
                                                 'class' => 'form-control',
@@ -123,7 +122,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                {!! Form::label('comentario', 'Comentários:') !!}
+                                {!! Form::label('comentario', 'Objeto:') !!}
                                 {!! Form::textarea('comentario', null, ['class' => 'form-control', 'rows' => 6, 'cols' => 40]) !!}
                             </div>
                         </div>

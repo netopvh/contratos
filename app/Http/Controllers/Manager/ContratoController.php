@@ -244,7 +244,7 @@ class ContratoController extends BaseController
             $numero = $value[0];
             $ano = $value[1];
 
-            $contrato = $this->contratos->with(['empresa'])->findWhere([
+            $contrato = $this->contratos->with(['empresa','aditivo'])->findWhere([
                 'numero' => $numero,
                 'ano' => $ano
             ])->first();

@@ -49,9 +49,8 @@ class RepContratoController extends BaseController
         }
 
         $contratos = $this->contrato->with(['empresa','casa'])->findWhere([
-            'data_inicio' => $request->get('inicio'),
-            'data_fim' => $request->get('fim'),
-            'status' => $status
+            ['data_inicio','<', $request->get('inicio')],
+            ['data_fim','>', $request->get('fim')],
         ]);
 
         dd($contratos);

@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            {{ Form::label('casas','Casa:') }} <span class="text-danger">*</span>
+            {{ Form::label('casas','Contratante:') }} <span class="text-danger">*</span>
             {{ Form::select('casa_id',$listCasas,null,[
                 'class' => 'form-control',
                 'placeholder' => 'Selecione a Casa',
@@ -35,11 +35,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
         <div class="form-group">
-            {{ Form::label('fornecedor','CPF/CNPJ ou Nome do Fornecedor:') }} <span class="text-danger">*</span>
+            {{ Form::label('fornecedor','CPF/CNPJ ou Nome do Contratado:') }} <span class="text-danger">*</span>
             <select name="empresa_id" class="form-control select2">
-                <option value="" selected>Selecione o Fornecedor</option>
+                <option value="" selected>Selecione o Contratado</option>
                 @foreach($listEmpresas as $empresa)
                     <option value="{{ $empresa->id }}"{{ isset($contrato->empresa_id) && $contrato->empresa_id == $empresa->id ? ' selected' : '' }}>
                         @if(strlen($empresa->cpf_cnpj) == 14)
@@ -54,7 +54,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            {!! Form::label('valor_homologado', 'Valor Homologado:') !!} <span class="text-danger">*</span>
+            {!! Form::label('valor_homologado', 'Valor Mensal:') !!} <span class="text-danger">*</span>
             {!! Form::text('homologado', null, [
             'class' => 'form-control',
             'required' => '',
@@ -66,7 +66,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            {!! Form::label('valor_executado', 'Valor Executado:') !!} <span class="text-danger">*</span>
+            {!! Form::label('valor_executado', 'Valor Total:') !!} <span class="text-danger">*</span>
             {!! Form::text('executado', null, [
             'class' => 'form-control',
             'required' => '',
@@ -126,7 +126,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        {!! Form::label('comentario', 'Comentários:') !!}
+        {!! Form::label('comentario', 'Objeto do Contrato:') !!}
         {!! Form::textarea('comentario', null, ['class' => 'form-control', 'rows' => 6, 'cols' => 40]) !!}
     </div>
 </div>

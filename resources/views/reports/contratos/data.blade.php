@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select name="status" class="form-control">
-                                        <option value="T">Todos</option>
+                                        <option value="">Todos</option>
                                         <option value="V">Vigente</option>
                                         <option value="T">Finalizado</option>
                                         <option value="T">Cancelado</option>

@@ -25,13 +25,13 @@
                 <a href="#"><i class="fa fa-plus-square"></i> <span>Cadastros</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @permission('ver-casas')
-                    <li class="{{ isUrlActive('casas') }}"><a href="{{ route('casas.index') }}"><i class="fa fa-institution"></i> Casas</a></li>
+                    <li class="{{ isUrlActive('casas') }}"><a href="{{ route('casas.index') }}"><i class="fa fa-institution"></i> Contratantes / Casas</a></li>
                     @endpermission
                     @permission('ver-unidades')
                     <li class="{{ isUrlActive('unidades') }}"><a href="{{ route('unidades.index') }}"><i class="fa fa-building"></i> Unidades</a></li>
                     @endpermission
                     @permission('ver-fornecedores')
-                    <li class="{{ isUrlActive('empresas') }}"><a href="{{ route('empresas.index') }}"><i class="fa fa-industry"></i> Fornecedores</a></li>
+                    <li class="{{ isUrlActive('empresas') }}"><a href="{{ route('empresas.index') }}"><i class="fa fa-industry"></i> Contratado / Fornecedor</a></li>
                     @endpermission
                 </ul>
             </li>
