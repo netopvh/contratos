@@ -51,7 +51,7 @@
                     </div>
                 	<div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-striped">
+                            <table class="table table-bordered table-condensed">
                                 <thead>
                                 <tr>
                                     <th>Numero do Contrato</th>
@@ -63,13 +63,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($contratos->count() < 0)
+                                @if($contratos->count() <= 0)
                                     <tr>
-                                        <td colspan="3">Sem Contratos Próximos do Vencimento</td>
+                                        <td colspan="6" class="text-center"><b>Sem Contratos Próximos do Vencimento</b></td>
                                     </tr>
                                 @else
                                     @foreach($contratos as $contrato)
-                                        <tr class="bg-danger">
+                                        <tr class="bg-red-active">
                                             <td>{{ $contrato->numero }} / {{ $contrato->ano }}</td>
                                             <td>@if(strlen($contrato->empresa->cpf_cnpj) == 14)
                                                     {{ mask('##.###.###/####-##', $contrato->empresa->cpf_cnpj) }}

@@ -13,22 +13,22 @@ class ContratoValidator extends LaravelValidator {
             'ano' => 'required',
             'casa_id' => 'required',
             'empresa_id' => 'required',
-            'homologado' => 'required',
-            'executado' => 'required',
+            'total' => 'required',
             'data_inicio' => 'required',
             'data_fim' => 'required',
-            'gestores' => 'required'
+            'gestores' => 'required',
+            'fiscais' => 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [
             'numero' => 'required',
             'ano' => 'required',
             'casa_id' => 'required',
             'empresa_id' => 'required',
-            'homologado' => 'required',
-            'executado' => 'required',
+            'total' => 'required',
             'data_inicio' => 'required',
             'data_fim' => 'required',
-            'gestores' => 'required'
+            'gestores' => 'required',
+            'fiscais' => 'required'
         ],
    ];
 

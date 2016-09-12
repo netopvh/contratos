@@ -50,13 +50,13 @@
                         <div id="print">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-xs-8">
+                                    <div class="col-xs-7">
                                         <img src="{{ asset('img/fiero.png') }}" width="260" alt="Sistema Fiero">
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="col-xs-5">
                                         <b>Contrato Nº:</b> {{ $contrato->numero }} / {{ $contrato->ano }} <br>
                                         <b>Vigência:</b> {{ $contrato->data_inicio }} até {{ $contrato->data_fim }} <br>
-                                        <b>Casa:</b> {{ $contrato->casa->nome }} <br>
+                                        <b>Contratante:</b> {{ $contrato->casa->nome }} <br>
                                         @if(! empty($contrato->unidade_id))
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -72,7 +72,7 @@
                                     <div class="col-xs-12">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <h4>Informações do Fornecedor / Prestador de Serviço</h4>
+                                                <h4>Informações do Contratado</h4>
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
@@ -117,25 +117,43 @@
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-xs-4">
-                                                        <b>Valor Homologado: </b>
-                                                        <br>R$ {{ number_format($contrato->homologado, 2, ',', '.') }}
+                                                    <div class="col-xs-3">
+                                                        <b>Valor Total: </b>
+                                                        <br>R$ {{ number_format($contrato->total, 2, ',', '.') }}
                                                     </div>
-                                                    <div class="col-xs-4">
-                                                        <b>Valor Executado: </b>
-                                                        <br>R$ {{ number_format($contrato->executado, 2, ',', '.') }}
-                                                    </div>
-                                                    <div class="col-xs-4">
+                                                    <div class="col-xs-3">
                                                         <b>Situação do Contrato: </b>
                                                         <br>{{ $status[$contrato->status] }}
                                                     </div>
+                                                    <div class="col-xs-3">
+                                                        <b>Contrato Aditivado? </b>
+                                                        <br>
+                                                        @if($contrato->aditivado == 'S')
+                                                            Sim
+                                                        @else
+                                                            Não
+                                                        @endif
+                                                    </div>
                                                 </div>
+                                                <hr>
                                                 <br>
-
+                                                @if($contrato->aditivado == 'S')
+                                                    <div class="row">
+                                                        <div class="col-xs-3">
+                                                            <b>Valor de Origem: </b>
+                                                            <br>R$ {{ number_format($contrato->valor_origem, 2, ',', '.') }}
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                @endif
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <b>Informações: </b> <br>
-                                                        {!! nl2br($contrato->comentario) !!}
+                                                        <b>Objeto do Contrato: </b> <br>
+                                                        @if($contrato->aditivado == 'S')
+                                                            {!! nl2br($contrato->aditivo->comentario) !!}
+                                                        @else
+                                                            {!! nl2br($contrato->comentario) !!}
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

@@ -35,7 +35,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
         <div class="form-group">
             {{ Form::label('fornecedor','CPF/CNPJ ou Nome do Contratado:') }} <span class="text-danger">*</span>
             <select name="empresa_id" class="form-control select2">
@@ -52,32 +52,19 @@
             </select>
         </div>
     </div>
+
     <div class="col-md-2">
         <div class="form-group">
-            {!! Form::label('valor_homologado', 'Valor Mensal:') !!} <span class="text-danger">*</span>
-            {!! Form::text('homologado', null, [
+            {!! Form::label('total', 'Valor Total do Contrato:') !!} <span class="text-danger">*</span>
+            {!! Form::text('total', null, [
             'class' => 'form-control',
             'required' => '',
-            'id' => 'homologado',
+            'id' => 'total',
             'data-prefix' => 'R$ ',
             'data-thousands' => '.',
             'data-decimal' => ',']) !!}
         </div>
     </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            {!! Form::label('valor_executado', 'Valor Total:') !!} <span class="text-danger">*</span>
-            {!! Form::text('executado', null, [
-            'class' => 'form-control',
-            'required' => '',
-            'id' => 'executado',
-            'data-prefix' => 'R$ ',
-            'data-thousands' => '.',
-            'data-decimal' => ',']) !!}
-        </div>
-    </div>
-</div>
-<div class="row">
     <div class="col-md-2">
         <div class="form-group">
             <label>Data Início</label> <span class="text-danger">*</span>
@@ -105,7 +92,19 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            {{ Form::label('tipoContrato','Tipo de Contrato:') }}
+            {{ Form::select('tipo',$listTipoContrato,null,[
+                'class' => 'form-control',
+                'placeholder' => 'Selecione o Tipo'
+
+            ]) }}
+        </div>
+    </div>
+    <div class="col-md-5">
         <div class="form-group">
             {!! Form::label('gestores', 'Gestores do Contrato:') !!} <span class="text-danger">*</span>
             @if(isset($contrato->gestores))
@@ -121,6 +120,32 @@
                     @endforeach
                 </select>
             @endif
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            {!! Form::label('gestores', 'Fiscais do Contrato:') !!} <span class="text-danger">*</span>
+            @if(isset($contrato->gestores))
+                <select name="fiscais[]" class="form-control select2" multiple required>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}"{{ in_array($user->id, $fiscais) ? ' selected="selected"' : '' }}>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            @else
+                <select name="fiscais[]" class="form-control select2" multiple required>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            @endif
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Anexo:</label>
+            {!! Form::file('arquivo', ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>

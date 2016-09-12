@@ -60,7 +60,7 @@ class ContratoController extends BaseController
         }
 
         if (!auth()->user()->is_super == 1) {
-            $contratos = $this->contratos->getByVencimentoFilter();
+            $contratos = $this->contratos->getByVencimentoTableFilter();
             $status = Status::getConstants();
         }
 
@@ -115,7 +115,21 @@ class ContratoController extends BaseController
                 abort(403);
             }
 
-            $this->contratos->create($request->all());
+            $data = $request->all();
+
+            $file = $request->file('arquivo');
+
+            if($request->hasFile('arquivo')){
+                $fileName = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension() ?: 'PDF';
+                $folderName = '/uploads/files';
+                $destinationPath = public_path() . $folderName;
+                $safeName = str_random(16) . '.' . $extension;
+                $file->move($destinationPath, $safeName);
+                $data['arquivo'] = $safeName;
+            }
+
+            $this->contratos->create($data);
 
             flash()->success('Cadastro Realizado com sucesso!');
             return redirect()->route('contratos.index');
@@ -137,10 +151,14 @@ class ContratoController extends BaseController
                 abort(403);
             }
 
-            $contrato = $this->contratos->find($id);
+            $contrato = $this->contratos->with('aditivo')->findWhere([
+                'id' => $id
+            ])->first();
             $tipo = TipoPessoa::getConstants();
             $status = Status::getConstants();
+            //$aditivo = $this->aditivos->getAllAditivos($contrato->id, $contrato->ano);
 
+            //dd($aditivo);
             return view('pages.contratos.view', compact('contrato', 'tipo', 'status'));
         } catch (ModelNotFoundException $e) {
             flash()->error('Erro: ' . $e->getMessage());
@@ -157,13 +175,19 @@ class ContratoController extends BaseController
             }
 
             $contrato = $this->contratos->with('gestores')->find($id);
+            //dd($contrato);
             $users = $this->users->all(['name', 'id']);
             $gestores = [];
+            $fiscais = [];
             foreach ($contrato->gestores->toArray() as $gestor) {
                 $gestores[] = $gestor['id'];
             }
+            foreach ($contrato->fiscais->toArray() as $fiscal) {
+                $fiscais[] = $fiscal['id'];
+            }
 
-            return view('pages.contratos.edit', compact('contrato', 'users', 'gestores'));
+
+            return view('pages.contratos.edit', compact('contrato', 'users', 'gestores', 'fiscais'));
 
         } catch (ModelNotFoundException $e) {
             flash()->error('Erro: ' . $e->getMessage());
@@ -234,33 +258,52 @@ class ContratoController extends BaseController
 
     public function contratoSearch(Request $request)
     {
-        try{
-            $data = $request->get('contrato');
-            $value = explode('/', $data);
-            if(count($value) < 2){
+        try {
+
+            $data = $this->countValues($request->get('contrato'));
+            if (!$data) {
                 flash()->error('Digite o Numero do contrato e o Ano');
                 return redirect()->route('contratos.aditivar.index');
             }
-            $numero = $value[0];
-            $ano = $value[1];
 
-            $contrato = $this->contratos->with(['empresa','aditivo'])->findWhere([
-                'numero' => $numero,
-                'ano' => $ano
+            $contrato = $this->contratos->with(['empresa', 'aditivo'])->findWhere([
+                'numero' => $data[0],
+                'ano' => $data[1]
             ])->first();
 
-            if(is_null($contrato)){
+            if (is_null($contrato)) {
                 flash()->error('Nenhum contato localizado!');
                 return redirect()->route('contratos.aditivar.index');
             }
 
-            $aditivos = $this->aditivos->findWhere(['contrato_id' => $contrato->id]);
-
-            return view('pages.contratos.forms.aditivo', compact('contrato','aditivos'));
-        }catch (ErrorException $e){
+            return view('pages.contratos.forms.aditivo', compact('contrato'));
+        } catch (ErrorException $e) {
             flash()->error($e->getMessage());
             return redirect()->route('contratos.aditivar.api');
         }
+
+    }
+
+    /*
+     * Métodos Privados
+     */
+
+    private function countValues($data)
+    {
+
+        $value = explode('/', $data);
+
+        if (count($value) == 2) {
+            return $value;
+        }
+
+        return false;
+
+    }
+
+    private function fileUpload(Request $request)
+    {
+        $uniqueFileName = uniqid() . $request->file('arquivo')->getPathname();
 
     }
 

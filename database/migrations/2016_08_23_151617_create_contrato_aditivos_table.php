@@ -13,14 +13,13 @@ class CreateContratoAditivosTable extends Migration
     public function up()
     {
         Schema::create('contrato_aditivos', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('contrato_id')->unsigned();
             $table->foreign('contrato_id')->references('id')->on('contratos');
+            $table->integer('posicao');
             $table->integer('ano');
             $table->timestamp('inicio');
             $table->timestamp('fim');
-            $table->decimal('homologado', 10,2);
-            $table->decimal('executado',10,2);
+            $table->decimal('total',10,2);
             $table->longText('comentario')->nullable();
             $table->timestamps();
         });

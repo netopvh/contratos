@@ -188,7 +188,7 @@ $("#aditivoForm").validate({
 $('.select2').select2({
     theme: "bootstrap",
     language: 'pt-BR',
-    placeholder: "Selecione o Fornecedor",
+    placeholder: "Selecione uma opção",
     allowClear: true
 
 });

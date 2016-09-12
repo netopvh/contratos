@@ -17,10 +17,9 @@
     <script src="{{ asset('plugins/jquery-maskmoney/dist/jquery.maskMoney.min.js') }}"></script>
     <script>
         $(function(){
-            $('#homologado, #executado').maskMoney();
+            $('#total').maskMoney();
             $("form").submit(function() {
-                $('#homologado').val($('#homologado').maskMoney('unmasked')[0]);
-                $('#executado').val($('#executado').maskMoney('unmasked')[0]);
+                $('#total').val($('#total').maskMoney('unmasked')[0]);
             });
         });
     </script>
@@ -51,7 +50,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 @include('vendor.flash.message')
-                                {!! Form::open(['route' => 'contratos.store', 'method' => 'post', 'id' => 'contratoForm', 'autocomplete' => 'off']) !!}
+                                {!! Form::open(['route' => 'contratos.store', 'files' => true, 'method' => 'post', 'id' => 'contratoForm', 'autocomplete' => 'off']) !!}
                                 @include('pages.contratos.forms.form')
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
                                 <a href="{{ route('contratos.index') }}" class="btn btn-primary"><i class="fa fa-share"></i> Voltar</a>

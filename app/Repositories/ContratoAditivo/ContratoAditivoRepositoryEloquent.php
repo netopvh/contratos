@@ -8,7 +8,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use CodeBase\Repositories\Contrato\ContratoRepository;
 use CodeBase\Models\ContratoAditivo;
 use CodeBase\Validators\ContratoAditivoValidator;
-use Carbon\Carbon;
+use DB;
 
 class ContratoAditivoRepositoryEloquent extends BaseRepository implements ContratoRepository
 {
@@ -34,6 +34,16 @@ class ContratoAditivoRepositoryEloquent extends BaseRepository implements Contra
     public function validator()
     {
         return ContratoAditivoValidator::class;
+    }
+
+    public function getAllAditivos($contrato, $ano)
+    {
+        $aditivos = DB::table('contrato_aditivos')
+            ->where('contrato_id', $contrato)
+            ->where('ano', $ano)
+            ->first();
+
+        return $aditivos;
     }
 
 

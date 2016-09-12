@@ -12,13 +12,23 @@ class Contrato extends Model
      * Colunas que poderão inserir registros no banco de dados
      */
     protected $fillable = [
-        'casa_id','unidade_id','numero','ano','homologado','executado','empresa_id','data_inicio','data_fim','status','comentario'
+        'casa_id','unidade_id','numero','aditivado','ano','tipo','total', 'arquivo', 'empresa_id','data_inicio','data_fim','origem','encerramento','valor_origem','status','comentario'
     ];
 
     /*
      * Especificação dos campos datas para formatação
      */
-    protected $dates = ['data_inicio', 'data_fim'];
+    protected $dates = ['data_inicio', 'data_fim', 'origem', 'encerramento'];
+
+    /*
+     * @function Relactionamento entre as tabelas de Contratos e Aditivos
+     *
+     *  @return mixed
+     */
+    public function aditivo()
+    {
+        return $this->hasMany(ContratoAditivo::class,'contrato_id','id');
+    }
 
     /*
      * @function Relactionamento entre as tabelas de Contratos e Usuários
@@ -28,6 +38,16 @@ class Contrato extends Model
     public function gestores()
     {
         return $this->belongsToMany(User::class,'contratos_gestores','contrato_id', 'user_id');
+    }
+
+    /*
+    * @function Relactionamento entre as tabelas de Contratos e Usuários
+    *
+    *  @return mixed
+    */
+    public function fiscais()
+    {
+        return $this->belongsToMany(User::class,'contratos_fiscais','contrato_id', 'user_id');
     }
 
     /*
@@ -53,25 +73,6 @@ class Contrato extends Model
     public function unidade()
     {
         return $this->belongsTo(Unidade::class);
-    }
-
-    public function aditivo()
-    {
-        $this->belongsToMany(ContratoAditivo::class);
-    }
-
-    public function scopeSearch($query, $keyword)
-    {
-        if (is_array($keyword)) {
-            $query->where(function ($query) use ($keyword) {
-                    $query->where("casa", "=","$keyword")
-                        ->orWhere("email", "LIKE", "%$keyword%")
-                        ->orWhere("blood_group", "LIKE", "%$keyword%")
-                        ->orWhere("phone", "LIKE", "%$keyword%");
-
-            });
-        }
-        return $query;
     }
 
     public function setDataInicioAttribute($value)
@@ -106,6 +107,43 @@ class Contrato extends Model
     }
 
     public function getDataFimAttribute($value)
+    {
+        return $this->returnDate($value);
+    }
+
+
+    public function setOrigemAttribute($value)
+    {
+        if(strlen($value) > 0){
+            try{
+                return $this->attributes['origem'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+
+            }catch (\Exception $e){
+                return $this->attributes['origem'] = date('Y-m-d');
+            }
+        }
+        return null;
+    }
+
+    public function getOrigemAttribute($value)
+    {
+        return $this->returnDate($value);
+    }
+
+    public function setEncerramentoAttribute($value)
+    {
+        if(strlen($value) > 0){
+            try{
+                return $this->attributes['encerramento'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+
+            }catch (\Exception $e){
+                return $this->attributes['encerramento'] = date('Y-m-d');
+            }
+        }
+        return null;
+    }
+
+    public function getEncerramentoAttribute($value)
     {
         return $this->returnDate($value);
     }

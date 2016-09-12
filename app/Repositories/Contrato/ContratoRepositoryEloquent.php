@@ -4,6 +4,7 @@
 namespace CodeBase\Repositories\Contrato;
 
 use CodeBase\Models\Casa;
+use CodeBase\Models\ContratoAditivo;
 use Illuminate\Container\Container as Application;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -18,6 +19,8 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
     protected $casa;
 
+    protected $aditivo;
+
     /**
      * Injeta o repository da Casa
      *
@@ -25,12 +28,14 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
      */
     public function __construct(
         Casa $casa,
+        ContratoAditivo $aditivo,
         Application $app
     )
     {
         parent::__construct($app);
         $this->app = $app;
         $this->casa = $casa;
+        $this->aditivo = $aditivo;
     }
 
     /**
@@ -96,20 +101,26 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['unidade_id'] = $attributes['unidade_id'];
         }
         $data['empresa_id'] = $attributes['empresa_id'];
-        $data['homologado'] = $attributes['homologado'];
-        $data['executado'] = $attributes['executado'];
+        $data['total'] = $attributes['total'];
         $data['data_inicio'] = $attributes['data_inicio'];
         $data['data_fim'] = $attributes['data_fim'];
+        $data['origem'] = $attributes['data_inicio'];
+        $data['encerramento'] = $attributes['data_fim'];
+        $data['valor_origem'] = $attributes['total'];
+        $data['arquivo'] = $attributes['arquivo'];
+        $data['aditivado'] = 'N';
         if (!empty($attributes['comentario'])) {
             $data['comentario'] = $attributes['comentario'];
         }
         $gestores = $attributes['gestores'];
+        $fiscais = $attributes['fiscais'];
 
         $contrato = $this->model->newInstance($data);
         $contrato->save();
         $this->resetModel();
 
         $contrato->gestores()->attach($gestores);
+        $contrato->fiscais()->attach($fiscais);
 
         return true;
     }
@@ -131,20 +142,22 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
             $data['unidade_id'] = $attributes['unidade_id'];
         }
         $data['empresa_id'] = $attributes['empresa_id'];
-        $data['homologado'] = $attributes['homologado'];
-        $data['executado'] = $attributes['executado'];
+        $data['total'] = $attributes['total'];
         $data['data_inicio'] = $attributes['data_inicio'];
         $data['data_fim'] = $attributes['data_fim'];
         if (!empty($attributes['comentario'])) {
             $data['comentario'] = $attributes['comentario'];
         }
         $gestores = $attributes['gestores'];
+        $fiscais = $attributes['fiscais'];
 
         $model = $this->model->findOrFail($id);
         $model->fill($data);
         $model->save();
         $model->gestores()->detach();
         $model->gestores()->attach($gestores);
+        $model->fiscais()->detach();
+        $model->fiscais()->attach($fiscais);
 
         return true;
     }
@@ -164,16 +177,36 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
         $query = $this->model->query();
 
-        $casa = $this->casa->where('nome', 'like', auth()->user()->casa)->first();
 
-        if(empty($casa)){
+        $casa = $this->casa->where('nome', '=', auth()->user()->casa)->first();
+
+        if(!empty($casa)){
             $query->where('data_fim', '<', $today)
                 ->where('status', 'V')
                 ->where('casa_id', $casa->id);
         }
 
-         return $query->with(['empresa', 'gestores','casa'])->get();
+        $contratos = $query->with(['empresa', 'gestores','casa'])->get();
 
+        return $contratos;
+
+    }
+
+    public function getByVencimentoTableFilter()
+    {
+        $query = $this->model->query();
+
+
+        $casa = $this->casa->where('nome', '=', auth()->user()->casa)->first();
+
+        if(!empty($casa)){
+            $query->where('status', 'V')
+                ->where('casa_id', $casa->id);
+        }
+
+        $contratos = $query->with(['empresa', 'gestores','casa'])->get();
+
+        return $contratos;
     }
 
     public function getByVencimento()
@@ -188,6 +221,17 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
         return $query->with(['empresa', 'gestores','casa'])->get();
 
+    }
+
+    public function setDefaultValues(array $attributes)
+    {
+
+        $contrato = $this->model->find($attributes['contrato_id']);
+        $contrato->aditivado = 'S';
+        $contrato->data_inicio = $attributes['inicio'];
+        $contrato->data_fim = $attributes['fim'];
+        $contrato->total = $attributes['total'];
+        $contrato->save();
     }
 
 }

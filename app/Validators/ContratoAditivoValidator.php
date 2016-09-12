@@ -13,16 +13,14 @@ class ContratoAditivoValidator extends LaravelValidator {
             'ano' => 'required',
             'inicio' => 'required',
             'fim' => 'required',
-            'homologado' => 'required',
-            'executado' => 'required'
+            'total' => 'required'
         ],
         ValidatorInterface::RULE_UPDATE => [
             'contrato_id' => 'required',
             'ano' => 'required',
             'inicio' => 'required',
             'fim' => 'required',
-            'homologado' => 'required',
-            'executado' => 'required'
+            'total' => 'required'
         ],
    ];
 

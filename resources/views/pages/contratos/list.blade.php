@@ -68,6 +68,7 @@
                                             <th>Gestores</th>
                                             <th>Início</th>
                                             <th>Fim</th>
+                                            <th>Aditivado</th>
                                             <th>Status</th>
                                             <th width="110" class="text-center">Ações</th>
                                         </tr>
@@ -88,6 +89,13 @@
                                             </td>
                                             <td>{{ $contrato->data_inicio }}</td>
                                             <td>{{ $contrato->data_fim }}</td>
+                                            <td>
+                                                @if($contrato->aditivado == 'S')
+                                                    <span class="label label-success">Sim</span>
+                                                @else
+                                                    <span class="label label-warning">Não</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $status[$contrato->status] }}</td>
                                             <td>
                                                 @permission('visualizar-contratos')

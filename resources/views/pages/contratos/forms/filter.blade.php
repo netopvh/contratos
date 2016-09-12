@@ -24,12 +24,12 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                {{ Form::label('status','Status:') }}
-                {{ Form::select('status',$listStatus,null,[
-                    'class' => 'form-control',
-                    'placeholder' => 'Selecione o Status'
-
-                ]) }}
+                <label>Status:</label>
+                <select name="status" class="form-control">
+                    @foreach($listStatus as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>
@@ -67,30 +67,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label>Data Início</label>
-                <div class="input-group date">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" name="inicio" class="form-control pull-right" id="inicio">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label>Data Fim</label>
-                <div class="input-group date">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" name="data_fim" class="form-control pull-right" id="fim">
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="row">
         <div class="col-md-3">
             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Pesquisar Contrato

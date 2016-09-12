@@ -8,8 +8,15 @@ use Carbon\Carbon;
 class ContratoAditivo extends Model
 {
     protected $fillable = [
-        'contrato_id', 'ano', 'inicio', 'fim', 'homologado', 'executado','comentario'
+        'contrato_id', 'posicao', 'ano', 'inicio', 'fim', 'total','comentario'
     ];
+
+
+    public function contrato()
+    {
+        $this->belongsTo(Contrato::class, 'contrato_id','id');
+    }
+
 
     public function setInicioAttribute($value)
     {

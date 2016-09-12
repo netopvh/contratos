@@ -11,10 +11,16 @@
 |
 */
 
+use CodeBase\Models\Contrato;
+
 // Authentication Routes...
 Route::get('login', 'Auth\AuthController@showLoginForm')->name('login');
 Route::post('login', 'Auth\AuthController@login');
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
+Route::get('/teste/{id}', function($id){
+    $teste = Contrato::find($id)->aditivo;
+    dd($teste);
+});
 
 // Registration Routes...
 Route::get('register', 'Auth\AuthController@showRegistrationForm');

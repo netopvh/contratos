@@ -17,10 +17,9 @@
     <script src="{{ asset('plugins/jquery-maskmoney/dist/jquery.maskMoney.min.js') }}"></script>
     <script>
         $(function () {
-            $('#homologado, #executado').maskMoney();
+            $('#total').maskMoney();
             $("form").submit(function () {
-                $('#homologado').val($('#homologado').maskMoney('unmasked')[0]);
-                $('#executado').val($('#executado').maskMoney('unmasked')[0]);
+                $('#total').val($('#total').maskMoney('unmasked')[0]);
             });
         });
     </script>
@@ -92,25 +91,12 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                {!! Form::label('valor_homologado', 'Valor Mensal:') !!} <span
+                                                {!! Form::label('total', 'Valor Total:') !!} <span
                                                         class="text-danger">*</span>
-                                                {!! Form::text('homologado', null, [
+                                                {!! Form::text('total', null, [
                                                 'class' => 'form-control',
                                                 'required' => '',
-                                                'id' => 'homologado',
-                                                'data-prefix' => 'R$ ',
-                                                'data-thousands' => '.',
-                                                'data-decimal' => ',']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                {!! Form::label('valor_executado', 'Valor Total:') !!} <span
-                                                        class="text-danger">*</span>
-                                                {!! Form::text('executado', null, [
-                                                'class' => 'form-control',
-                                                'required' => '',
-                                                'id' => 'executado',
+                                                'id' => 'total',
                                                 'data-prefix' => 'R$ ',
                                                 'data-thousands' => '.',
                                                 'data-decimal' => ',']) !!}
@@ -149,17 +135,19 @@
                             <table class="table table-bordered table-striped table-condensed">
                                 <thead>
                                 <tr>
+                                    <th width="40">Ordem</th>
                                     <th width="130">Contrato e Ano</th>
                                     <th width="290">Fornecedor</th>
                                     <th width="90">Data Início</th>
                                     <th width="90">Data Fim</th>
-                                    <th>Comentário</th>
+                                    <th>Objeto</th>
                                     <th width="120" class="text-center"> Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($aditivos as $aditivo)
+                                @foreach($contrato->aditivo as $aditivo)
                                     <tr>
+                                        <td>{{ $aditivo->posicao }}</td>
                                         <td>{{ $contrato->numero }} / {{ $contrato->ano }}</td>
                                         <td>{{ $contrato->empresa->razao }}</td>
                                         <td>{{ $aditivo->inicio }}</td>

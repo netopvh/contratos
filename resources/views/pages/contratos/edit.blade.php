@@ -16,10 +16,9 @@
     <script src="{{ asset('plugins/jquery-maskmoney/dist/jquery.maskMoney.min.js') }}"></script>
     <script>
         $(function(){
-            $('#homologado, #executado').maskMoney();
+            $('#total').maskMoney();
             $("form").submit(function() {
-                $('#homologado').val($('#homologado').maskMoney('unmasked')[0]);
-                $('#executado').val($('#executado').maskMoney('unmasked')[0]);
+                $('#total').val($('#executado').maskMoney('unmasked')[0]);
             });
         });
     </script>
