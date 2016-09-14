@@ -200,7 +200,16 @@ class ContratoController extends BaseController
                 abort(403);
             }
 
-            $aditivo = $this->contratos->update($request->all(), $id);
+            $aditivado = $this->contratos->findWhere([
+                'id' => $id,
+                'aditivado' => 'S'
+            ])->first();
+
+            if(!is_null($aditivado)){
+                $this->aditivos->setAditivoUpdate($request->all(), $id);
+            }
+
+            $this->contratos->update($request->all(), $id);
 
             flash()->success('Contrato atualizado com sucesso!');
             return redirect()->route('contratos.index');

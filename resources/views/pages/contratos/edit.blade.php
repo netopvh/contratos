@@ -14,11 +14,32 @@
     <script src="{{ asset('plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-validation/dist/additional-methods.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-maskmoney/dist/jquery.maskMoney.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootbox/bootbox.js') }}"></script>
     <script>
-        $(function(){
+        $(function () {
             $('#total').maskMoney();
-            $("form").submit(function() {
+            $("form").submit(function (e) {
+                var currentForm = this;
+
                 $('#total').val($('#total').maskMoney('unmasked')[0]);
+
+                e.preventDefault();
+                bootbox.confirm({
+                    message: "<b>Atenção!!</b> <br>Se o contrato estiver Aditivado, as Informações do Aditivo do Contrato serão atualizados. <br> Deseja Continuar?",
+                    buttons: {
+                        confirm: {
+                            label: 'Continuar'
+                        },
+                        cancel: {
+                            label: 'Cancelar'
+                        }
+                    },
+                    callback: function (result) {
+                        if(result){
+                            currentForm.submit();
+                        }
+                    }
+                });
             });
         });
     </script>
@@ -41,7 +62,8 @@
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                         class="fa fa-minus"></i></button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-remove"></i>
                             </button>
                         </div>
                     </div>
@@ -51,8 +73,11 @@
                                 @include('vendor.flash.message')
                                 {!! Form::model($contrato, ['method' => 'patch', 'route' => ['contratos.update', $contrato->id], 'id' =>'contratoForm', 'autocomplete' => 'off']) !!}
                                 @include('pages.contratos.forms.form')
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
-                                <a href="{{ route('contratos.index') }}" class="btn btn-primary"><i class="fa fa-share"></i> Voltar</a>
+                                <button type="submit" data-bb="confirm" class="btn btn-success"><i
+                                            class="fa fa-save"></i> Salvar
+                                </button>
+                                <a href="{{ route('contratos.index') }}" class="btn btn-primary"><i
+                                            class="fa fa-share"></i> Voltar</a>
                                 {!! Form::close() !!}
                             </div>
                         </div>
