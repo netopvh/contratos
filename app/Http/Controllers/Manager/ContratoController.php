@@ -123,7 +123,7 @@ class ContratoController extends BaseController
             if($request->hasFile('arquivo')){
                 $fileName = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension() ?: 'PDF';
-                $folderName = '/uploads/files';
+                $folderName = public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR .'files';
                 $destinationPath = public_path() . $folderName;
                 $safeName = str_random(16) . '.' . $extension;
                 $file->move($destinationPath, $safeName);
@@ -200,7 +200,7 @@ class ContratoController extends BaseController
                 abort(403);
             }
 
-            $this->contratos->update($request->all(), $id);
+            $aditivo = $this->contratos->update($request->all(), $id);
 
             flash()->success('Contrato atualizado com sucesso!');
             return redirect()->route('contratos.index');

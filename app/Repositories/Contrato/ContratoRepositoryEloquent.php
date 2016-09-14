@@ -121,8 +121,6 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $gestores = $attributes['gestores'];
         $fiscais = $attributes['fiscais'];
 
-        dd($data);
-
         $contrato = $this->model->newInstance($data);
         $contrato->save();
         $this->resetModel();
