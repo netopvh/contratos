@@ -148,6 +148,6 @@ Route::group(['prefix' => 'contratos', 'namespace' => 'Manager'], function(){
 Route::group(['prefix' => 'report', 'namespace' => 'Report'], function(){
     Route::get('/', 'RepContratoController@index')->name('report.index');
     Route::get('/date', 'RepContratoController@byData')->name('report.data');
-    Route::post('/date', 'RepContratoController@searchData')->name('report.data.print');
+    Route::post('/date', 'RepContratoController@searchByDate')->name('report.data.print');
 
 });

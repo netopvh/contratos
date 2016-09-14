@@ -63,7 +63,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select name="status" class="form-control">
+                                    <select name="status" class="form-control" req>
                                         <option value="">Todos</option>
                                         <option value="V">Vigente</option>
                                         <option value="T">Finalizado</option>

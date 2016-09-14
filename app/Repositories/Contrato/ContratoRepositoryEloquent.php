@@ -107,13 +107,21 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $data['origem'] = $attributes['data_inicio'];
         $data['encerramento'] = $attributes['data_fim'];
         $data['valor_origem'] = $attributes['total'];
-        $data['arquivo'] = $attributes['arquivo'];
+        if (!empty($attributes['tipo'])) {
+            $data['tipo'] = $attributes['tipo'];
+        }
+        if (!empty($attributes['arquivo'])) {
+            $data['arquivo'] = $attributes['arquivo'];
+        }
         $data['aditivado'] = 'N';
         if (!empty($attributes['comentario'])) {
             $data['comentario'] = $attributes['comentario'];
+            $data['comentario_origem'] = $attributes['comentario'];
         }
         $gestores = $attributes['gestores'];
         $fiscais = $attributes['fiscais'];
+
+        dd($data);
 
         $contrato = $this->model->newInstance($data);
         $contrato->save();
@@ -147,6 +155,9 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $data['data_fim'] = $attributes['data_fim'];
         if (!empty($attributes['comentario'])) {
             $data['comentario'] = $attributes['comentario'];
+        }
+        if (!empty($attributes['tipo'])) {
+            $data['tipo'] = $attributes['tipo'];
         }
         $gestores = $attributes['gestores'];
         $fiscais = $attributes['fiscais'];
@@ -223,6 +234,18 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
 
     }
 
+    public function getContratoView($id)
+    {
+        $contrato = $this->model->find($id);
+        $aditivo = $contrato->aditivo()->where('posicao');
+
+        //$query = $this->model->query();
+
+        //$contrato = $this->model->with('aditivo')->where('id', $id)->first();
+
+        return $contrato;
+    }
+
     public function setDefaultValues(array $attributes)
     {
 
@@ -231,7 +254,26 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $contrato->data_inicio = $attributes['inicio'];
         $contrato->data_fim = $attributes['fim'];
         $contrato->total = $attributes['total'];
+        $contrato->comentario = $attributes['comentario'];
         $contrato->save();
+    }
+
+    public function getContratoByDate($inicio, $fim, $status)
+    {
+        $dataInicio = Carbon::createFromFormat('d/m/Y', $inicio)->format('Y-m-d');
+        $dataFim = Carbon::createFromFormat('d/m/Y', $fim)->format('Y-m-d');
+
+        if(empty($status)){
+            $contratos = $this->model->with(['empresa','casa'])->whereBetween('data_inicio', [$dataInicio, $dataFim])
+                ->orWhereBetween('data_fim', [$dataInicio, $dataFim])
+                ->get();
+        }else{
+            $contratos = $this->model->with(['empresa','casa'])->whereBetween('data_inicio', [$dataInicio, $dataFim])
+                ->orWhereBetween('data_fim', [$dataInicio, $dataFim])
+                ->where('status', $status)
+                ->get();
+        }
+        return $contratos;
     }
 
 }

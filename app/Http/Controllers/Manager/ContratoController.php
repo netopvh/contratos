@@ -117,6 +117,7 @@ class ContratoController extends BaseController
 
             $data = $request->all();
 
+
             $file = $request->file('arquivo');
 
             if($request->hasFile('arquivo')){
@@ -151,14 +152,10 @@ class ContratoController extends BaseController
                 abort(403);
             }
 
-            $contrato = $this->contratos->with('aditivo')->findWhere([
-                'id' => $id
-            ])->first();
+            $contrato = $this->contratos->getContratoView($id);
             $tipo = TipoPessoa::getConstants();
             $status = Status::getConstants();
-            //$aditivo = $this->aditivos->getAllAditivos($contrato->id, $contrato->ano);
 
-            //dd($aditivo);
             return view('pages.contratos.view', compact('contrato', 'tipo', 'status'));
         } catch (ModelNotFoundException $e) {
             flash()->error('Erro: ' . $e->getMessage());

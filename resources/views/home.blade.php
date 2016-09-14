@@ -54,10 +54,10 @@
                             <table class="table table-bordered table-condensed">
                                 <thead>
                                 <tr>
-                                    <th>Numero do Contrato</th>
+                                    <th width="200">Numero do Contrato</th>
                                     <th>CPF / CNPJ</th>
-                                    <th>Fornecedor</th>
-                                    <th>Casa</th>
+                                    <th>Contratado</th>
+                                    <th>Contratante</th>
                                     <th>Vencimento</th>
                                     <th width="60">Ação</th>
                                 </tr>

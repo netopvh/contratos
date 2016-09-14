@@ -178,6 +178,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
         'Flash' => Laracasts\Flash\Flash::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

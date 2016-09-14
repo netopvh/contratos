@@ -149,11 +149,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                         <b>Objeto do Contrato: </b> <br>
-                                                        @if($contrato->aditivado == 'S')
-                                                            {!! nl2br($contrato->aditivo->comentario) !!}
-                                                        @else
-                                                            {!! nl2br($contrato->comentario) !!}
-                                                        @endif
+                                                        {!! nl2br($contrato->comentario) !!}
                                                     </div>
                                                 </div>
                                             </div>

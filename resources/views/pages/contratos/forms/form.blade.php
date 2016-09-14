@@ -18,7 +18,7 @@
             {{ Form::label('casas','Contratante:') }} <span class="text-danger">*</span>
             {{ Form::select('casa_id',$listCasas,null,[
                 'class' => 'form-control',
-                'placeholder' => 'Selecione a Casa',
+                'placeholder' => 'Selecione o Contratante',
                 'required' => ''
             ]) }}
         </div>

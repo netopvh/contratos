@@ -18,7 +18,7 @@
         $(function(){
             $('#total').maskMoney();
             $("form").submit(function() {
-                $('#total').val($('#executado').maskMoney('unmasked')[0]);
+                $('#total').val($('#total').maskMoney('unmasked')[0]);
             });
         });
     </script>

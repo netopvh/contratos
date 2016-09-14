@@ -12,7 +12,7 @@ class Contrato extends Model
      * Colunas que poderão inserir registros no banco de dados
      */
     protected $fillable = [
-        'casa_id','unidade_id','numero','aditivado','ano','tipo','total', 'arquivo', 'empresa_id','data_inicio','data_fim','origem','encerramento','valor_origem','status','comentario'
+        'casa_id','unidade_id','numero','aditivado','ano','tipo','total', 'arquivo', 'empresa_id','data_inicio','data_fim','origem','encerramento','valor_origem','comentario_origem','status','comentario'
     ];
 
     /*

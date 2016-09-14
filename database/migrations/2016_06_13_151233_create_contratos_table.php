@@ -33,6 +33,7 @@ class CreateContratosTable extends Migration
             $table->timestamp('origem');
             $table->decimal('valor_origem',10,2);
             $table->timestamp('encerramento');
+            $table->longText('comentario_origem');
             $table->enum('status',Status::getKeys());
             $table->longText('comentario');
             $table->timestamps();
