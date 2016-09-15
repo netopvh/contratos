@@ -176,6 +176,10 @@ Breadcrumbs::register('contratos.status', function($breadcrumbs) {
     $breadcrumbs->parent('contratos.index');
     $breadcrumbs->push('Status', '');
 });
+Breadcrumbs::register('contratos.aditivo', function($breadcrumbs) {
+    $breadcrumbs->parent('contratos.index');
+    $breadcrumbs->push('Aditivo', '');
+});
 
 /*
  * Fim Contratos

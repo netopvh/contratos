@@ -12,7 +12,7 @@
             <div class="col-md-8">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Fornecedores</h3>
+                        <h3 class="box-title">Contratado</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -28,7 +28,7 @@
                             <div class="col-md-7">
                                 <a href="{{ route('empresas.create') }}" class="btn btn-primary">
                                     <i class="fa fa-plus-circle"></i>
-                                    Novo Fornecedor
+                                    Novo Contratado
                                 </a>
                             </div>
                         </div>

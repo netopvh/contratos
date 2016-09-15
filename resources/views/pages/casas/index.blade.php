@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Casas</h3>
+                        <h3 class="box-title">Contratantes</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -28,7 +28,7 @@
                             <div class="col-md-7">
                                 <a href="{{ route('casas.create') }}" class="btn btn-primary">
                                     <i class="fa fa-plus-circle"></i>
-                                    Nova Casa
+                                    Novo Contratante
                                 </a>
                             </div>
                         </div>

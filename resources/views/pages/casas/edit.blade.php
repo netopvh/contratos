@@ -17,7 +17,7 @@
             <div class="col-md-5">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Editar Casa</h3>
+                        <h3 class="box-title">Editar Contratante</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
