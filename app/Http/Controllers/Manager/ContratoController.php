@@ -123,7 +123,7 @@ class ContratoController extends BaseController
             if($request->hasFile('arquivo')){
                 $fileName = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension() ?: 'PDF';
-                $folderName = public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR .'files';
+                $folderName = DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR .'files';
                 $destinationPath = public_path() . $folderName;
                 $safeName = str_random(16) . '.' . $extension;
                 $file->move($destinationPath, $safeName);

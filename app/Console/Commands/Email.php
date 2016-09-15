@@ -2,42 +2,42 @@
 
 namespace CodeBase\Console\Commands;
 
+use CodeBase\Events\MailSendNotification;
 use CodeBase\Repositories\Contrato\ContratoRepositoryEloquent;
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Inspiring;
 
-class Inspire extends Command
+class Email extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'inspire';
+    protected $signature = 'emails:send';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Display an inspiring quote';
+    protected $description = 'Envia email para os usuários conforme especificações';
 
     /**
-     * Instancia da Classe ContratoRepositoryEloquent
+     * Cria uma nova instancia do ContratoRepositoryEloquent
      *
      * @var object
      */
     protected $contrato;
 
     /**
-     * Inicializa a classe injetando o repository
+     * Create a new command instance.
      *
-     * @void
+     * @return void
      */
     public function __construct(ContratoRepositoryEloquent $contrato)
     {
         parent::__construct();
-        $this->contrato =$contrato;
+        $this->contrato = $contrato;
     }
 
     /**
@@ -47,7 +47,8 @@ class Inspire extends Command
      */
     public function handle()
     {
+        $contratos = $this->contrato->getByVencimento();
 
-        $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
+        event(new MailSendNotification($contratos));
     }
 }

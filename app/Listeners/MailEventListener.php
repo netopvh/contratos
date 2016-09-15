@@ -28,8 +28,13 @@ class MailEventListener
         $contratos = $event->getData()->toArray();
 
         foreach($contratos as $contrato){
-            $this->mailer->send('emails.vencimento', $contrato, function ($message) {
-                $message->to('angelo.neto@fiero.org.br')->subject('Aviso de Vencimento de Contrato!');
+            $this->mailer->send('emails.vencimento', $contrato, function ($message) use ($contrato) {
+                foreach ($contrato['gestores'] as $gestor) {
+                    $message->to($gestor['email'])->subject('Aviso de Vencimento de Contrato!');
+                }
+                foreach ($contrato['fiscais'] as $fiscal) {
+                    $message->to($fiscal['email'])->subject('Aviso de Vencimento de Contrato!');
+                }
             });
         }
     }

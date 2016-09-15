@@ -7,10 +7,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <link rel="stylesheet" href="{{ elixir('css/default.css') }}">
     @yield('styles-after')
     @yield('styles-before')
-    <link rel="stylesheet" href="{{ elixir('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

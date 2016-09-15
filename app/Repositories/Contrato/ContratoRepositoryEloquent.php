@@ -195,7 +195,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
                 ->where('casa_id', $casa->id);
         }
 
-        $contratos = $query->with(['empresa', 'gestores','casa'])->get();
+        $contratos = $query->with(['empresa', 'gestores','casa','fiscais'])->get();
 
         return $contratos;
 
@@ -228,7 +228,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $query->where('data_fim', '<', $today)
             ->where('status', 'V');
 
-        return $query->with(['empresa', 'gestores','casa'])->get();
+        return $query->with(['empresa','gestores','casa','fiscais'])->get();
 
     }
 
