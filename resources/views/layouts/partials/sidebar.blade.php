@@ -6,7 +6,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46af0f0d54.png" class="img-circle" alt="User Image">
+                <img src="{{ Adldap::search()->users()->find(Auth::user()->username)->getThumbnailEncoded() }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p class="small">{{ text_limit(auth()->user()->name) }}</p>
