@@ -66,7 +66,7 @@ class EmpresaController extends BaseController
 
             $this->empresas->create($request->all());
 
-            flash()->success('Fornecedor cadastrado com sucesso!');
+            flash()->success('Contratado cadastrado com sucesso!');
             return redirect()->route('empresas.index');
 
         }catch (ValidatorException $e){
@@ -103,7 +103,7 @@ class EmpresaController extends BaseController
 
             $this->empresas->update($request->all(),$id);
 
-            flash()->success('Fornecedor atualizado com sucesso!');
+            flash()->success('Contratado atualizado com sucesso!');
             return redirect()->route('empresas.index');
 
         }catch (ValidatorException $e){
@@ -121,10 +121,10 @@ class EmpresaController extends BaseController
         $result = $this->empresas->delete($id);
 
         if(! $result){
-            flash()->error('Erro ao excluir casa');
+            flash()->error('Erro ao excluir contratado');
             return redirect()->route('empresas.index');
         }
-
+        flash()->success('Contratado removido com sucesso!');
         return redirect()->route('empresas.index');
     }
 }

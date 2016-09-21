@@ -112,6 +112,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         }
         if (!empty($attributes['arquivo'])) {
             $data['arquivo'] = $attributes['arquivo'];
+            $data['arquivo_origem'] = $attributes['arquivo'];
         }
         $data['aditivado'] = 'N';
         if (!empty($attributes['comentario'])) {
@@ -153,6 +154,9 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $data['data_fim'] = $attributes['data_fim'];
         if (!empty($attributes['comentario'])) {
             $data['comentario'] = $attributes['comentario'];
+        }
+        if (!empty($attributes['arquivo'])) {
+            $data['arquivo'] = $attributes['arquivo'];
         }
         if (!empty($attributes['tipo'])) {
             $data['tipo'] = $attributes['tipo'];
@@ -253,6 +257,7 @@ class ContratoRepositoryEloquent extends BaseRepository implements ContratoRepos
         $contrato->data_fim = $attributes['fim'];
         $contrato->total = $attributes['total'];
         $contrato->comentario = $attributes['comentario'];
+        $contrato->arquivo = $attributes['arquivo'];
         $contrato->save();
     }
 

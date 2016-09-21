@@ -8,7 +8,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Gestão de Usuário
+            Gerenciamento
         </h1>
         {!! Breadcrumbs::render('unidades.create') !!}
     </section>

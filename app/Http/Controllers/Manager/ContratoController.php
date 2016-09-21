@@ -172,7 +172,6 @@ class ContratoController extends BaseController
             }
 
             $contrato = $this->contratos->with('gestores')->find($id);
-            //dd($contrato);
             $users = $this->users->all(['name', 'id']);
             $gestores = [];
             $fiscais = [];
@@ -209,7 +208,20 @@ class ContratoController extends BaseController
                 $this->aditivos->setAditivoUpdate($request->all(), $id);
             }
 
-            $this->contratos->update($request->all(), $id);
+            $data = $request->all();
+
+            $file = $request->file('arquivo');
+
+            if($request->hasFile('arquivo')){
+                $extension = $file->getClientOriginalExtension() ?: 'PDF';
+                $folderName = DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR .'files';
+                $destinationPath = public_path() . $folderName;
+                $safeName = str_random(16) . '.' . $extension;
+                $file->move($destinationPath, $safeName);
+                $data['arquivo'] = $safeName;
+            }
+
+            $this->contratos->update($data, $id);
 
             flash()->success('Contrato atualizado com sucesso!');
             return redirect()->route('contratos.index');

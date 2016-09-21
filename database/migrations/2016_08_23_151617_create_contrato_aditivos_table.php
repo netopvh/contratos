@@ -19,6 +19,7 @@ class CreateContratoAditivosTable extends Migration
             $table->integer('ano');
             $table->timestamp('inicio');
             $table->timestamp('fim');
+            $table->string('arquivo');
             $table->decimal('total',10,2);
             $table->longText('comentario')->nullable();
             $table->timestamps();

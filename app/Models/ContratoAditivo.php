@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class ContratoAditivo extends Model
 {
     protected $fillable = [
-        'contrato_id', 'posicao', 'ano', 'inicio', 'fim', 'total','comentario'
+        'contrato_id', 'posicao', 'ano', 'inicio', 'fim', 'total','arquivo','comentario'
     ];
 
 

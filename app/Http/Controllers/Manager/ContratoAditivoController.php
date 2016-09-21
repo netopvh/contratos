@@ -35,16 +35,26 @@ class ContratoAditivoController extends BaseController
                 abort(403);
             }
 
-            //Atualiza Tabela de Registros
-            $this->contrato->setDefaultValues($request->all());
-
             //Define a contagem de posição
             $data = $this->verificaPosicao($request->get('contrato_id'), $request->all());
 
+            $file = $request->file('arquivo');
+
+            if($request->hasFile('arquivo')){
+                $extension = $file->getClientOriginalExtension() ?: 'PDF';
+                $folderName = DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR .'files';
+                $destinationPath = public_path() . $folderName;
+                $safeName = str_random(16) . '.' . $extension;
+                $file->move($destinationPath, $safeName);
+                $data['arquivo'] = $safeName;
+            }
+
+            //Atualiza Tabela de Registros
+            $this->contrato->setDefaultValues($data);
             //Cria o Registro
             $this->repository->create($data);
 
-            flash()->success('Cadastro Realizado com sucesso!');
+            flash()->success('Contrato aditivado com sucesso!');
             return redirect()->route('contratos.aditivar.index');
         } catch (ValidatorException $e) {
             flash()->error('Erro:' . $e->getMessage());

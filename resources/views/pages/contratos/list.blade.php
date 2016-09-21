@@ -65,12 +65,12 @@
                                             <th>Contrato</th>
                                             <th>Empresa</th>
                                             <th>Casa</th>
-                                            <th>Gestores</th>
+                                            <th width="60">Gestores</th>
                                             <th>Início</th>
                                             <th>Fim</th>
-                                            <th>Aditivado</th>
+                                            <th width="60">Aditivado</th>
                                             <th>Status</th>
-                                            <th width="110" class="text-center">Ações</th>
+                                            <th width="135" class="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -98,6 +98,10 @@
                                             </td>
                                             <td>{{ $status[$contrato->status] }}</td>
                                             <td>
+                                                <a href="{{ url('/') }}/uploads/files/{{ $contrato->arquivo }}" target="_blank"
+                                                   class="btn-sm btn-flickr" data-toggle="tooltip" title="Integra do Contrato">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </a>&nbsp;
                                                 @permission('visualizar-contratos')
                                                 <a href="{{ route('contratos.view', $contrato->id) }}"
                                                    class="btn-sm btn-microsoft" data-toggle="tooltip" title="Visualizar">

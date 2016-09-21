@@ -51,7 +51,7 @@ class CasaController extends BaseController
 
             $this->casas->create($request->all());
 
-            flash()->success('Casa cadastrada com sucesso!');
+            flash()->success('Contratante cadastrado com sucesso!');
             return redirect()->route('casas.index');
         } catch(ValidatorException $e){
             flash()->error("<b> Erro:</b>".$e->getMessageBag()->first());
@@ -80,6 +80,7 @@ class CasaController extends BaseController
 
             $this->casas->update($request->all(),$id);
 
+            flash()->success('Contratante atualizado com sucesso!');
             return redirect()->route('casas.index');
 
         }catch (ValidatorException $e){
@@ -95,12 +96,11 @@ class CasaController extends BaseController
         }
 
         $result = $this->casas->delete($id);
-
         if(! $result){
-            flash()->error('Erro ao excluir casa');
+            flash()->error('Erro ao excluir contratante');
             return redirect()->route('casas.index');
         }
-
+        flash()->success('Contratante removido com sucesso!');
         return redirect()->route('casas.index');
     }
 }

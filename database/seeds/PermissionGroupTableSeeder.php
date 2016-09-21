@@ -13,6 +13,7 @@ class PermissionGroupTableSeeder extends Seeder
      */
     public function run()
     {
+        //ID 1
         DB::table('permissions_group')->insert([
             [
                 'name' => 'Administração de Acessos',
@@ -67,6 +68,7 @@ class PermissionGroupTableSeeder extends Seeder
             ],
         ]);
 
+        //ID 8
         DB::table('permissions_group')->insert([
             [
                 'name' => 'Gerenciamento de Cadastros',
@@ -100,6 +102,7 @@ class PermissionGroupTableSeeder extends Seeder
             ],
         ]);
 
+        //ID 12
         DB::table('permissions_group')->insert([
             [
                 'name' => 'Movimentação e Relatórios',

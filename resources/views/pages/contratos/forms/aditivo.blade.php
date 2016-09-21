@@ -42,7 +42,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"></div>
                     <div class="panel-body">
-                        {{ Form::open(['route' => 'contratos.aditivar.store', 'method' => 'post', 'id' => 'aditivoForm', 'autocomplete' => 'off']) }}
+                        {{ Form::open(['route' => 'contratos.aditivar.store', 'files' => true, 'method' => 'post', 'id' => 'aditivoForm', 'autocomplete' => 'off']) }}
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -107,6 +107,14 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Anexo:</label>
+                                    {!! Form::file('arquivo', ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-8">
                                 {!! Form::label('comentario', 'Objeto:') !!}
                                 {!! Form::textarea('comentario', null, ['class' => 'form-control', 'rows' => 6, 'cols' => 40]) !!}
@@ -153,7 +161,12 @@
                                         <td>{{ $aditivo->inicio }}</td>
                                         <td>{{ $aditivo->fim }}</td>
                                         <td>{{ $aditivo->comentario }}</td>
-                                        <td></td>
+                                        <td>
+                                            <a href="{{ url('/') }}/uploads/files/{{ $aditivo->arquivo }}" target="_blank"
+                                               class="btn-sm btn-flickr" data-toggle="tooltip" title="Integra do Contrato">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                            </a>&nbsp;
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

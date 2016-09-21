@@ -29,6 +29,7 @@ class CreateContratosTable extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade');
             $table->timestamp('data_inicio');
             $table->string('arquivo');
+            $table->string('arquivo_origem');
             $table->timestamp('data_fim');
             $table->timestamp('origem');
             $table->decimal('valor_origem',10,2);

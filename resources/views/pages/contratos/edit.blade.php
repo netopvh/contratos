@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 @include('vendor.flash.message')
-                                {!! Form::model($contrato, ['method' => 'patch', 'route' => ['contratos.update', $contrato->id], 'id' =>'contratoForm', 'autocomplete' => 'off']) !!}
+                                {!! Form::model($contrato, ['method' => 'patch', 'files' => true, 'route' => ['contratos.update', $contrato->id], 'id' =>'contratoForm', 'autocomplete' => 'off']) !!}
                                 @include('pages.contratos.forms.form')
                                 <button type="submit" data-bb="confirm" class="btn btn-success"><i
                                             class="fa fa-save"></i> Salvar
