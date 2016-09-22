@@ -27,6 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_super',
+        'is_master',
         'status'
     ];
 

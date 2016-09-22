@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('casa');
             $table->string('password',80);
             $table->tinyInteger('is_super')->default(0)->comment('É Super Administrador');
+            $table->tinyInteger('is_master')->default(0)->comment('Ver Todas as Unidades');
             $table->integer('status')->default(1);
             $table->rememberToken();
             $table->timestamps();

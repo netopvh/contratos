@@ -17,7 +17,7 @@ class CreateUnidadesTable extends Migration
             $table->string('nome');
             $table->integer('casa_id')->unsigned();
             $table->foreign('casa_id')->references('id')->on('casas');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

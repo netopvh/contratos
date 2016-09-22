@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class UnidadeTableSeeder extends Seeder
 {
@@ -14,68 +15,144 @@ class UnidadeTableSeeder extends Seeder
     public function run()
     {
 
-        $faker = Faker::create();
-
         DB::table('unidades')->insert([
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SUCOR Recursos Humanos',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SUCOR Informática',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SUCOR Infraestrutura',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SUCOR Transporte',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SUCOR Compras',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SUCOR Controle e Acompanhamento',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SUCOR Financeiro',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'Marechal Rondon',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'CEET Sebastião Camargo',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'CETEM DR Volkmar Shuler',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SENAI Casa da Indústria',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => $faker->company,
-                'casa_id' => $faker->numberBetween(1,4),
-                'email' => $faker->companyEmail
+                'nome' => 'SENAI Ariquemes',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SENAI Cacoal',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SENAI Jí-Paraná',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SENAI Vilhena',
+                'casa_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Clínica Porto Velho',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Escola Porto Velho',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Clínica Ariquemes',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Clínica Cacoal',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Escola Cacoal',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Clínica Jí-Paraná',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Clínica Pimenta Bueno',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Clínica Vilhena',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
 
         ]);

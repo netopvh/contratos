@@ -82,6 +82,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
             $data['name'] = $user->name;
             $data['username'] = $user->username;
             $data['is_super'] = $user->is_super;
+            $data['is_master'] = $user->is_master;
             $data['role_id'] = $role->id;
 
             return $data;

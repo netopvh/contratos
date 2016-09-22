@@ -11,7 +11,7 @@
             <div class="pull-left info">
                 <p class="small">{{ text_limit(auth()->user()->name) }}</p>
                 <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#">{{ auth()->user()->unidade }}</a>
             </div>
         </div>
 

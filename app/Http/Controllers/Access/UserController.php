@@ -71,6 +71,7 @@ class UserController extends BaseController
 
         $user = $this->users->find($id);
         $user->is_super = $request->input('is_super');
+        $user->is_master = $request->input('is_master');
         $user->save();
 
         $user->detachRoles();

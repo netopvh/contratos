@@ -59,8 +59,11 @@ class ContratoController extends BaseController
             abort(403);
         }
 
-        if (!auth()->user()->is_super == 1) {
-            $contratos = $this->contratos->getByVencimentoTableFilter();
+        if (auth()->user()->is_super == 0 && auth()->user()->is_master == 0) {
+            $contratos = $this->contratos->getByVencimentoTableFilterUnidade();
+            $status = Status::getConstants();
+        }else if(auth()->user()->is_master == 1){
+            $contratos = $this->contratos->getByVencimentoTableFilterCasa();
             $status = Status::getConstants();
         }
 
@@ -171,7 +174,12 @@ class ContratoController extends BaseController
                 abort(403);
             }
 
-            $contrato = $this->contratos->with('gestores')->find($id);
+            $contrato = $this->contratos->with(['gestores','fiscais','unidade'])->find($id);
+
+            if(auth()->user()->unidade != $contrato->unidade->nome){
+                abort(403);
+            }
+
             $users = $this->users->all(['name', 'id']);
             $gestores = [];
             $fiscais = [];

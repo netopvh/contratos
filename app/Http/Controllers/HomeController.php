@@ -32,10 +32,15 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        if(!auth()->user()->is_super == 1){
-            $contratos = $this->contratos->getByVencimentoFilter();
-        }else{
+        if(auth()->user()->is_super == 1){
             $contratos = $this->contratos->getByVencimento();
+        }
+        else if(auth()->user()->is_master == 1) {
+            $contratos = $this->contratos->getByVencimentoFilter();
+        }
+        else
+        {
+            $contratos = $this->contratos->getByVencimentoFilterUnidade();
         }
 
         return view('home', compact('contratos'));

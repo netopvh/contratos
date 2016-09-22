@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-7">
+                                    <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                             {{ Form::label('grupo','Grupos de Usuário:') }} <span class="text-danger">*</span>
                                             {{ Form::select('role_id',$roles,null,[
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group{{ $errors->has('is_super') ? ' has-error' : '' }}">
-                                            {{ Form::label('verTodas','Ver Todas as Casas:') }}
+                                            {{ Form::label('verTodas','Ver Todas as Casas:') }}<br>
                                             <label>
                                                 {{ Form::radio('is_super', 0, true) }}
                                                 Não
@@ -75,6 +75,24 @@
                                             @if ($errors->has('is_super'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('is_super') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group{{ $errors->has('is_master') ? ' has-error' : '' }}">
+                                            {{ Form::label('verUnidades','Ver Todas Unidades:') }}<br>
+                                            <label>
+                                                {{ Form::radio('is_master', 0, true) }}
+                                                Não
+                                            </label>
+                                            <label>
+                                                {{ Form::radio('is_master', 1) }}
+                                                Sim
+                                            </label>
+                                            @if ($errors->has('is_master'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('is_master') }}</strong>
                                             </span>
                                             @endif
                                         </div>

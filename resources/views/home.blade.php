@@ -21,7 +21,7 @@
                     <span class="info-box-icon bg-aqua-gradient"><i class="fa fa-clone"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Total Contratos</span>
+                        <span class="info-box-text">Total Contratos a vencer</span>
                         <span class="info-box-number">{{ str_pad($contratos->count(), 4, '0', STR_PAD_LEFT)}}</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -58,6 +58,7 @@
                                     <th>CPF / CNPJ</th>
                                     <th>Contratado</th>
                                     <th>Contratante</th>
+                                    <th>Unidade / Setor</th>
                                     <th>Vencimento</th>
                                     <th width="60">Ação</th>
                                 </tr>
@@ -78,6 +79,7 @@
                                                 @endif</td>
                                             <td>{{ $contrato->empresa->razao }}</td>
                                             <td>{{ $contrato->casa->nome }}</td>
+                                            <td>{{ $contrato->unidade->nome }}</td>
                                             <td>{{ $contrato->data_fim }}</td>
                                             <td>
                                                 @permission('visualizar-contratos')
@@ -93,6 +95,13 @@
                             </table>
                         </div>
                 	</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well">
+                    <a href="{{ url('/') }}/uploads/manual/manual.pdf" class="btn btn-primary">Manual do Sistema de Contratos</a>
                 </div>
             </div>
         </div>

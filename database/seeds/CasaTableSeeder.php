@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CasaTableSeeder extends Seeder
 {
@@ -14,19 +15,29 @@ class CasaTableSeeder extends Seeder
     {
         DB::table('casas')->insert([
             [
-                'nome' => 'SESI'
+                'nome' => 'SESI',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => 'SENAI'
+                'nome' => 'SENAI',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => 'FIERO'
+                'nome' => 'FIERO',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => 'IEL'
+                'nome' => 'IEL',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
-                'nome' => 'SESI/SENAI'
+                'nome' => 'SESI/SENAI',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ]);
     }
