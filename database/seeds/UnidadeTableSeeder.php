@@ -53,6 +53,12 @@ class UnidadeTableSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'nome' => 'SUCOR Obras e Investimentos',
+                'casa_id' => 5,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'nome' => 'SUCOR Financeiro',
                 'casa_id' => 5,
                 'created_at' => Carbon::now(),
@@ -113,6 +119,12 @@ class UnidadeTableSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'nome' => 'CAT Albano Franco',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'nome' => 'SESI Escola Porto Velho',
                 'casa_id' => 1,
                 'created_at' => Carbon::now(),
@@ -149,8 +161,32 @@ class UnidadeTableSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'nome' => 'SESI Escola Pimenta Bueno',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'nome' => 'SESI Clínica Vilhena',
                 'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Escola Vilhena',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'SESI Casa da Indústria',
+                'casa_id' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'nome' => 'IEL Casa da Indústria',
+                'casa_id' => 4,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

@@ -101,7 +101,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="well">
-                    <a href="{{ url('/') }}/uploads/manual/manual.pdf" class="btn btn-primary">Manual do Sistema de Contratos</a>
+                    <a href="{{ url('/') }}/uploads/manual/manual.pdf" target="_blank" class="btn btn-primary">Manual do Sistema de Contratos</a>
                 </div>
             </div>
         </div>
