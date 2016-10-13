@@ -55,7 +55,7 @@
 
     <div class="col-md-2">
         <div class="form-group">
-            {!! Form::label('total', 'Valor Total do Contrato:') !!} <span class="text-danger">*</span>
+            {!! Form::label('total', 'Total do Contrato:') !!} <span class="text-danger">*</span>
             {!! Form::text('total', null, [
             'class' => 'form-control',
             'required' => '',
