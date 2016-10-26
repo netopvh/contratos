@@ -40,4 +40,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function casas()
+    {
+        return $this->belongsToMany(Casa::class,'user_casas','user_id','casa_id');
+    }
+
 }

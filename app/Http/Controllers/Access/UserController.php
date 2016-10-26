@@ -7,6 +7,7 @@ use CodeBase\Http\Requests;
 use CodeBase\Repositories\User\UserRepositoryEloquent;
 use CodeBase\Http\Controllers\BaseController;
 use CodeBase\Repositories\Role\RoleRepositoryEloquent;
+use CodeBase\Repositories\Casa\CasaRepositoryEloquent;
 use Auth;
 
 
@@ -22,15 +23,22 @@ class UserController extends BaseController
      */
     protected $roles;
 
+    /**
+     * @var
+     */
+    protected $casas;
+
 
     public function __construct(
         UserRepositoryEloquent $users,
-        RoleRepositoryEloquent $roles
+        RoleRepositoryEloquent $roles,
+        CasaRepositoryEloquent $casas
     )
     {
         parent::__construct();
         $this->users = $users;
         $this->roles = $roles;
+        $this->casas = $casas;
     }
 
     /*
@@ -52,15 +60,23 @@ class UserController extends BaseController
 
     public function edit($id)
     {
+        //Verifica a permissão do Usuário
         if (!auth()->user()->can('editar-usuarios')) {
             abort(403);
         }
 
+        //Efetua a localização do Usuário e habilita em edição
         $user = $this->users->edit($id);
 
-        $roles = $this->roles->lists('display_name', 'id');
+        $roles = $this->roles->all(['id','display_name']);
 
-        return view('pages.users.edit', compact('user', 'roles'));
+        $casas = $this->casas->all(['id','nome']);
+
+        foreach ($user->casas->toArray() as $casa){
+            $casasAr[] = $casa['id'];
+        }
+
+        return view('pages.users.edit', compact('user', 'roles','casas','casasAr'));
     }
 
     public function update($id, Request $request)
@@ -69,14 +85,8 @@ class UserController extends BaseController
             abort(403);
         }
 
-        $user = $this->users->find($id);
-        $user->is_super = $request->input('is_super');
-        $user->is_master = $request->input('is_master');
-        $user->save();
+        $this->users->update($request->all(), $id);
 
-        $user->detachRoles();
-
-        $user->attachRole($request->input('role_id'));
 
         flash()->success('Perfil atribuído com sucesso!');
         return redirect()->route('users.index');
