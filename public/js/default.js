@@ -4,6 +4,15 @@ $('#grid').DataTable({
     }
 });
 
+
+$('.select2').select2({
+    theme: "bootstrap",
+    language: 'pt-BR',
+    placeholder: "Selecione uma opção",
+    allowClear: true
+
+});
+
 //Faz as Validações das Casas
 $("#casaForm").validate({
     rules: {
@@ -185,13 +194,6 @@ $("#aditivoForm").validate({
 
 //Configurações do Contrato Form
 
-$('.select2').select2({
-    theme: "bootstrap",
-    language: 'pt-BR',
-    placeholder: "Selecione uma opção",
-    allowClear: true
-
-});
 $('#inicio').datepicker({
     autoclose: true,
     clearBtn: true,

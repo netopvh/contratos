@@ -72,23 +72,33 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function edit($id)
     {
-        $user = $this->model->find($id);
+        $user = $this->model->with('casas','roles')->find($id);
 
         if(! is_null($user)){
 
-            $role = $user->roles()->first();
-
-            $data['id'] = $user->id;
-            $data['name'] = $user->name;
-            $data['username'] = $user->username;
-            $data['is_super'] = $user->is_super;
-            $data['is_master'] = $user->is_master;
-            $data['role_id'] = $role->id;
-
-            return $data;
+            return $user;
         }
 
         return null;
+    }
+
+    public function update(array $data, $id)
+    {
+        $user = $this->model->find($id);
+        $user->is_super = $data['is_super'];
+        $user->is_master = $data['is_master'];
+        $user->save();
+
+
+        //Retira Roles
+        $user->detachRoles();
+        //Aplica Novas Roles
+        $user->attachRole($data['role_id']);
+        
+        $user->casas()->detach();
+        $user->casas()->attach($data['casas']);
+
+        return true;
     }
 
     /*
